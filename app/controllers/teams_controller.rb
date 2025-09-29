@@ -2,6 +2,9 @@ class TeamsController < ApplicationController
 
 	def index
 		@teams = Team.all
+          @hi = "hi"
+          puts "Debugging message: #{@hi}"
+          puts "Debugging message: #{@teams}"
 	end
 
 	def show
@@ -10,7 +13,7 @@ class TeamsController < ApplicationController
 		@teams = Team.all
 
       	 #Team touches
-             po_team_touches = Unirest.get("http://stats.nba.com/js/data/sportvu/2014/touchesTeamDataPost.json")
+             po_team_touches = HTTParty.get("http://stats.nba.com/js/data/sportvu/2014/touchesTeamDataPost.json")
              a = po_team_touches.body
              b = a["resultSets"]
              c = b[0]
@@ -25,7 +28,7 @@ class TeamsController < ApplicationController
 
 
       	 #Team roster - Used teamplayerdashboard instead of commonteamroster to show only players who have played in playoffs
-             po_team_rosters = Unirest.get("http://stats.nba.com/stats/teamplayerdashboard?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@team.team_id}&VsConference=&VsDivision=")
+             po_team_rosters = HTTParty.get("http://stats.nba.com/stats/teamplayerdashboard?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@team.team_id}&VsConference=&VsDivision=")
              a = po_team_rosters.body
              b = a["resultSets"]
              c = b[1] #Player Totals array

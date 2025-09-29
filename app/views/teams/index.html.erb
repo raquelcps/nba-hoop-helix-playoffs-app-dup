@@ -8,57 +8,68 @@
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	Welcome to Hoop Helix. The focus right now is on the 2015 NBA Playoffs, but I have more features and improvements planned for the off-season. Thanks for visiting. 
 </div>
+
+
 <div class="col-md-12 team-list">	
+<div class="container">
+  <div class="row">
+    <div class="col">col</div>
+    <div class="col">col</div>
+    <div class="col">col</div>
+    <div class="col">col</div>
+  </div>
+</div>
+
 <% @teams[0..15].each do |team| %>
-  <div class="col-md-3 team-unit">
+  <div class="col team-unit">
 	  	<a href="teams/<%= team.team_id %>" onclick="dosomething();">
 	  <% if team.team_id == 1610612737 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/atl_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612738 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/bos_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612751 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/bkn_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612741 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/chi_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612739 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/cle_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612742 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/dal_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612744 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/gsw_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612745 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/hou_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612746 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/lac_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612763 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/mem_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612749 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/mil_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612740 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/nop_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612740/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612757 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/por_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612759 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/sas_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612761 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/tor_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg">
    	  <% end %>
    	  <% if team.team_id == 1610612764 %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/was_logo.svg">
+		  <img src="https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg">
    	  <% end %>
    	<p><%= team.team_city %> <%= team.team_name %></p>
    	</a>

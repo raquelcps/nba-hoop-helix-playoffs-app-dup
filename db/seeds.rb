@@ -6,10 +6,28 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-players = Unirest.get("http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2014-15").body["resultSets"][0]["rowSet"]
+# players = HTTParty.get("http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2014-15").body["resultSets"][0]["rowSet"]
+
+response = HTTParty.get(
+  "https://stats.nba.com/stats/commonallplayers",
+  query: {
+    LeagueID: "00",   # 10 = WNBA, 00 = NBA
+    Season: "2014-15",
+    IsOnlyCurrentSeason: "0"
+  },
+  headers: {
+    "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+    "Accept" => "application/json, text/plain, */*",
+    "Referer" => "https://stats.wnba.com/"
+  }
+)
+puts "hi"
+puts "Debugging message: #{response.body}"
+parsed = JSON.parse(response.body)
+players = parsed["resultSets"][0]["rowSet"]
 
 players.each do |player_array|
-  Player.create(:name => player_array[1], :person_id => player_array[0]) if player_array[2] == 1
+	Player.create(:name => player_array[1], :person_id => player_array[0]) if player_array[2] == 1
 end
 
 @teams = Team.create([

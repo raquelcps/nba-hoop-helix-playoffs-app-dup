@@ -3,7 +3,7 @@ class FinalsController < ApplicationController
 	  @player = Player.find_by(:person_id => params[:person_id])
 
       #NBA.com common player data
-      po_player_data = Unirest.get("http://stats.nba.com/stats/commonplayerinfo?LeagueID=00&PlayerID=#{@player.person_id}&SeasonType=Playoffs")
+      po_player_data = HTTParty.get("http://stats.nba.com/stats/commonplayerinfo?LeagueID=00&PlayerID=#{@player.person_id}&SeasonType=Playoffs")
 
       a = po_player_data.body
       b = a["resultSets"]
@@ -19,11 +19,11 @@ class FinalsController < ApplicationController
       end
 
       #NBA.com player dashboard totals
-      @po_player_dashboard_totals = Unirest.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
-        @rd_player_dashboard_totals = Unirest.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=04/18/2015&DateTo=05/02/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
-      	@sf_player_dashboard_totals = Unirest.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=05/03/2015&DateTo=05/17/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
-      	@cf_player_dashboard_totals = Unirest.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=05/19/2015&DateTo=05/27/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
-      	@f_player_dashboard_totals = Unirest.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
+      @po_player_dashboard_totals = HTTParty.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
+        @rd_player_dashboard_totals = HTTParty.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=04/18/2015&DateTo=05/02/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
+      	@sf_player_dashboard_totals = HTTParty.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=05/03/2015&DateTo=05/17/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
+      	@cf_player_dashboard_totals = HTTParty.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=05/19/2015&DateTo=05/27/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
+      	@f_player_dashboard_totals = HTTParty.get("http://stats.nba.com/stats/playerdashboardbygeneralsplits?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&VsConference=&VsDivision=")
       
       a = @f_player_dashboard_totals.body
       b = a["resultSets"]
@@ -42,7 +42,7 @@ class FinalsController < ApplicationController
       end
 
       #NBA.com passes made 
-      @po_player_passes = Unirest.get("http://stats.nba.com/stats/playerdashptpass?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&Month=0&OpponentTeamID=0&Outcome=&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=0&VsConference=&VsDivision=")
+      @po_player_passes = HTTParty.get("http://stats.nba.com/stats/playerdashptpass?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&Month=0&OpponentTeamID=0&Outcome=&PerMode=Totals&Period=0&PlayerID=#{@player.person_id}&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=0&VsConference=&VsDivision=")
       
       a = @po_player_passes.body
       b = a["resultSets"]
@@ -95,7 +95,7 @@ class FinalsController < ApplicationController
       end
 
       #NBA.com player's team totals data
-      po_player_team_data = Unirest.get("http://stats.nba.com/stats/teamdashboardbygeneralsplits?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@po_playerdata[0]["TEAM_ID"]}&VsConference=&VsDivision=")
+      po_player_team_data = HTTParty.get("http://stats.nba.com/stats/teamdashboardbygeneralsplits?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@po_playerdata[0]["TEAM_ID"]}&VsConference=&VsDivision=")
     
       a = po_player_team_data.body
       b = a["resultSets"]
@@ -112,7 +112,7 @@ class FinalsController < ApplicationController
       end
 
        # Team Passing Totals 
-       po_team_passing = Unirest.get("http://stats.nba.com/stats/teamdashptpass?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@po_playerdata[0]["TEAM_ID"]}&VsConference=&VsDivision=")
+       po_team_passing = HTTParty.get("http://stats.nba.com/stats/teamdashptpass?DateFrom=06/04/2015&DateTo=06/19/2015&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=Totals&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@po_playerdata[0]["TEAM_ID"]}&VsConference=&VsDivision=")
        a = po_team_passing.body
        b = a["resultSets"]
        c = b[0]
@@ -133,7 +133,7 @@ class FinalsController < ApplicationController
 
 
        #Team touches
-       po_team_touches = Unirest.get("http://stats.nba.com/js/data/sportvu/2014/touchesTeamDataPost.json")
+       po_team_touches = HTTParty.get("http://stats.nba.com/js/data/sportvu/2014/touchesTeamDataPost.json")
        a = po_team_touches.body
        b = a["resultSets"]
        c = b[0]
@@ -149,12 +149,12 @@ class FinalsController < ApplicationController
        @po_team_touches_total = @po_team_touches_array.select {|team| team["TEAM_ID"].to_i == @po_playerdata[0]["TEAM_ID"] }
 
        #Player Touches
-       po_player_touches = Unirest.get("http://stats.nba.com/js/data/sportvu/2014/touchesDataPost.json").body["resultSets"][0]["rowSet"]
+       po_player_touches = HTTParty.get("http://stats.nba.com/js/data/sportvu/2014/touchesDataPost.json").body["resultSets"][0]["rowSet"]
 
        @po_player_touches_total = po_player_touches.select{ |player| player[0].to_i == @po_playerdata[0]["PERSON_ID"] }
      	
      #Team roster - Used teamplayerdashboard instead of commonteamroster to show only players who have played in playoffs
-       po_team_rosters = Unirest.get("http://stats.nba.com/stats/teamplayerdashboard?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=PerGame&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@po_playerdata[0]["TEAM_ID"]}&VsConference=&VsDivision=")
+       po_team_rosters = HTTParty.get("http://stats.nba.com/stats/teamplayerdashboard?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PaceAdjust=N&PerMode=PerGame&Period=0&PlusMinus=N&Rank=N&Season=2014-15&SeasonSegment=&SeasonType=Playoffs&TeamID=#{@po_playerdata[0]["TEAM_ID"]}&VsConference=&VsDivision=")
        a = po_team_rosters.body
        b = a["resultSets"]
        c = b[1]
@@ -177,7 +177,7 @@ class FinalsController < ApplicationController
 #Touches by playoff round using game logs
 
 #Finals Gm 6
-f_gm6_boxscore = Unirest.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400406&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
+f_gm6_boxscore = HTTParty.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400406&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
 a = f_gm6_boxscore.body
 b = a["resultSets"]
 c = b[0] #playertrack
@@ -195,7 +195,7 @@ end
 @f_gm6_team_touches = @f_gm6_boxscore_array.select { |player| player["TEAM_ID"].to_i == @po_playerdata[0]["TEAM_ID"]}
 
 #Finals Gm 5
-f_gm5_boxscore = Unirest.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400405&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
+f_gm5_boxscore = HTTParty.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400405&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
 a = f_gm5_boxscore.body
 b = a["resultSets"]
 c = b[0] #playertrack
@@ -213,7 +213,7 @@ end
 @f_gm5_team_touches = @f_gm5_boxscore_array.select { |player| player["TEAM_ID"].to_i == @po_playerdata[0]["TEAM_ID"]}
 
 #Finals Gm 4
-f_gm4_boxscore = Unirest.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400404&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
+f_gm4_boxscore = HTTParty.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400404&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
 a = f_gm4_boxscore.body
 b = a["resultSets"]
 c = b[0] #playertrack
@@ -231,7 +231,7 @@ end
 @f_gm4_team_touches = @f_gm4_boxscore_array.select { |player| player["TEAM_ID"].to_i == @po_playerdata[0]["TEAM_ID"]}
 
 #Finals Gm 3
-f_gm3_boxscore = Unirest.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400403&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
+f_gm3_boxscore = HTTParty.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400403&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
 a = f_gm3_boxscore.body
 b = a["resultSets"]
 c = b[0] #playertrack
@@ -257,7 +257,7 @@ end
 
 
 #Finals game 2
-f_gm2_boxscore = Unirest.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400402&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
+f_gm2_boxscore = HTTParty.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400402&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
 a = f_gm2_boxscore.body
 b = a["resultSets"]
 c = b[0] #playertrack
@@ -276,7 +276,7 @@ end
 
 
 #Finals game 1
-f_gm1_boxscore = Unirest.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400401&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
+f_gm1_boxscore = HTTParty.get("http://stats.nba.com/stats/boxscoreplayertrackv2?EndPeriod=10&EndRange=55800&GameID=0041400401&RangeType=2&Season=2014-15&SeasonType=Playoffs&StartPeriod=1&StartRange=0")
 a = f_gm1_boxscore.body
 b = a["resultSets"]
 c = b[0] #playertrack

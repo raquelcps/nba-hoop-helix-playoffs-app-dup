@@ -2,14 +2,17 @@ source 'https://rubygems.org'
 ruby '3.3.0'
 
 #Added by Author
-gem 'unirest'
+gem 'httparty', '~> 0.23.1'
 gem 'bootstrap', '~> 5.3.3' # Or the latest stable version
 gem 'pg', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.1'
 # Use SCSS for stylesheets
-gem 'dartsass-rails', '~> 0.5.0'
+gem 'sassc-rails'
+gem 'sprockets-rails'
+# Use coffeescript for now but will migrate to js later
+gem 'coffee-script'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 4.2', '>= 4.2.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
