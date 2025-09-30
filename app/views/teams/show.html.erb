@@ -6,56 +6,7 @@
 	</div>
 	<div class="row">
     <div class="col-md-4 team-page-profile">
-      
-      	<% if @team.team_city == "Atlanta" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/atl_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Boston" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/bos_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Brooklyn" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/bkn_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Chicago" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/chi_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Cleveland" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/cle_logo.svg">
-   	 
-   	  <% elsif @team.team_city == "Dallas" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/dal_logo.svg">
-   	 
-   	  <% elsif @team.team_city == "Golden State" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/gsw_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Houston" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/hou_logo.svg">
-   	  
-   	  <% elsif @team.team_name == "Clippers" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/lac_logo.svg">
-   	
-   	  <% elsif @team.team_city == "Memphis" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/mem_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Milwaukee" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/mil_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "New Orleans" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/nop_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Portland" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/por_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "San Antonio" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/sas_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Toronto" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/tor_logo.svg">
-   	  
-   	  <% elsif @team.team_city == "Washington" %>
-		  <img src="http://stats.nba.com/media/img/teams/logos/was_logo.svg">
-   	  <% end %>
-   	  
+      <img src="https://cdn.nba.com/logos/nba/<%= @team.team_id %>/primary/L/logo.svg">
     </div>
     <div class="col-md-4 player-page-info">
     	<h5><%= (@po_team_totals_array[0]["PTS"]/ @po_team_totals_array[0]["GP"].to_f).round(1) %> PTS / <%= (@po_team_totals_array[0]["REB"]/ @po_team_totals_array[0]["GP"].to_f).round(1) %> REB / <%= (@po_team_totals_array[0]["AST"]/ @po_team_totals_array[0]["GP"].to_f).round(1) %> AST</h5>
@@ -798,7 +749,7 @@
 		  <tr>
 			<td class="single-pic">
 		  	  <a href="/players/<%= hash['PLAYER_ID'] %>" onclick="dosomething();">
-		  	  	<img src="http://stats.nba.com/media/players/230x185/<%= hash['PLAYER_ID'] %>.png" width="75px"></a>
+						<img src="https://cdn.nba.com/headshots/nba/latest/260x190/<%= hash['PLAYER_ID'] %>.png" width="75px">
 		    </td>
 		    <td><a href="/players/<%= hash['PLAYER_ID'] %>" onclick="dosomething();"><%= hash["PLAYER_NAME"] %></a>
 			</td>

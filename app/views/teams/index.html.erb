@@ -1,80 +1,31 @@
 <%= render 'shared/team_header' %>
 <!-- Main Pane -->
 <div class="main">
-<div class="page-sub-nav col-md-12">	 
-	<h4>Team Index</h4> 	 	
-</div>	
-<div class="col-md-12 alert alert-info alert-dismissible alert-custom" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	Welcome to Hoop Helix. The focus right now is on the 2015 NBA Playoffs, but I have more features and improvements planned for the off-season. Thanks for visiting. 
-</div>
+	<div class="page-sub-nav col-md-12">
+		<h4>Team Index</h4>
+	</div>
+	<div class="col-md-12 alert alert-info alert-dismissible alert-custom" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		Welcome to Hoop Helix. The focus right now is on the 2015 NBA Playoffs, but I have more features and improvements planned for the off-season. Thanks for visiting.
+	</div>
 
 
-<div class="col-md-12 team-list">	
-<div class="container">
-  <div class="row">
-    <div class="col">col</div>
-    <div class="col">col</div>
-    <div class="col">col</div>
-    <div class="col">col</div>
-  </div>
+	<div class="col-md-12 team-list">
+		<div class="container">
+			<div class="row">
+				<div class="col">col</div>
+				<div class="col">col</div>
+				<div class="col">col</div>
+				<div class="col">col</div>
+			</div>
+		</div>
+		<% @teams[0..15].sort_by { |hash| hash.team_city}.each do |hash| %>
+			<div class="col team-unit">
+					<a href="teams/<%= hash.team_id %>" onclick="dosomething();">
+						<img src="https://cdn.nba.com/logos/nba/<%= hash.team_id %>/primary/L/logo.svg">
+					<p><%= hash.team_city %> <%= hash.team_name %></p>
+				</a>
+			</div>
+		<% end %>
+	</div>
 </div>
-
-<% @teams[0..15].each do |team| %>
-  <div class="col team-unit">
-	  	<a href="teams/<%= team.team_id %>" onclick="dosomething();">
-	  <% if team.team_id == 1610612737 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612738 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612751 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612741 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612739 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612742 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612744 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612745 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612745/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612746 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612746/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612763 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612749 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612740 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612740/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612757 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612759 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612761 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg">
-   	  <% end %>
-   	  <% if team.team_id == 1610612764 %>
-		  <img src="https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg">
-   	  <% end %>
-   	<p><%= team.team_city %> <%= team.team_name %></p>
-   	</a>
-   	</div>
-  <% end %>
-</div>
-</div>
-

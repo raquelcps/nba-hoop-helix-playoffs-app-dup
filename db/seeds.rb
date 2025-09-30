@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# players = HTTParty.get("http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2014-15").body["resultSets"][0]["rowSet"]
+# TODO: add an example of what the response body looks like from the HTTParty request below
 
 response = HTTParty.get(
   "https://stats.nba.com/stats/commonallplayers",
