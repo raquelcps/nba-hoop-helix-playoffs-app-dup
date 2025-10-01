@@ -212,7 +212,6 @@ GEM
     sdoc (2.6.4)
       rdoc (>= 5.0)
     securerandom (0.4.1)
-    spring (4.4.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -259,7 +258,6 @@ DEPENDENCIES
   rails (~> 7.1)
   sassc-rails
   sdoc (~> 2.6, >= 2.6.4)
-  spring
   sprockets-rails
   turbolinks
   uglifier (~> 4.2, >= 4.2.1)

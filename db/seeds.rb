@@ -21,13 +21,11 @@ response = HTTParty.get(
     "Referer" => "https://stats.wnba.com/"
   }
 )
-puts "hi"
-puts "Debugging message: #{response.body}"
-parsed = JSON.parse(response.body)
-players = parsed["resultSets"][0]["rowSet"]
 
 players.each do |player_array|
-	Player.create(:name => player_array[1], :person_id => player_array[0]) if player_array[2] == 1
+	Player.find_or_create_by(person_id: player_array[0]) do |player|
+    player.name = player_array[1]
+  end
 end
 
 @teams = Team.create([
@@ -47,4 +45,4 @@ end
 	{ :team_city => "San Antonio", :team_name => "Spurs" , :team_id => 1610612759 }, 
 	{ :team_city => "Toronto", :team_name => "Raptors" , :team_id => 1610612761 },
 	{ :team_city => "Washington", :team_name => "Wizards" , :team_id => 1610612764 }      
-	])
+])
