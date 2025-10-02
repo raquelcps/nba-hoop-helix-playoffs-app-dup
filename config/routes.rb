@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   root to: 'teams#index'
   # get '/players' => 'players#index'
-  get '/players/:person_id' => 'players#show'
+  # get '/players/:person_id' => 'players#show'
   get '/players/round1/:person_id' => 'rounds#show'
   get '/players/semis/:person_id' => 'semifinals#show'
   get '/players/conf_finals/:person_id' => 'conffinals#show'
   get '/players/finals/:person_id' => 'finals#show'
-  get '/teams' => 'teams#index'
-  get '/teams/:team_id' => 'teams#show'
+  # get '/teams' => 'teams#index'
+  # get '/teams/:team_id' => 'teams#show'
+  resources :teams, only: [:index, :show]
+  resources :players, only: [:show]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

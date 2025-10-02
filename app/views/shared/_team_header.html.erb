@@ -15,8 +15,10 @@
 							<i class="fa fa-users"></i> Select a playoff team <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
-							<% @teams[0..15].sort_by { |hash| hash.team_city}.each do |hash| %>
-								<li><a class="dropdown-item" href="/teams/<%= hash.team_id %>"><%= hash.team_city %> <%= hash.team_name %></a></li>
+							<% @teams.each do |team| %>
+								<%= link_to team_path(team[:team_id]), class: "dropdown-item" do %>
+									<p><%= team[:team_name] %></p>
+								<% end %>
 							<% end %>
 						</ul>
 					</li>

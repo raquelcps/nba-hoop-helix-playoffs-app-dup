@@ -19,13 +19,12 @@
 				<div class="col">col</div>
 			</div>
 		</div>
-		<% @teams[0..15].sort_by { |hash| hash.team_city}.each do |hash| %>
-			<div class="col team-unit">
-					<a href="teams/<%= hash.team_id %>" onclick="dosomething();">
-						<img src="https://cdn.nba.com/logos/nba/<%= hash.team_id %>/primary/L/logo.svg">
-					<p><%= hash.team_city %> <%= hash.team_name %></p>
-				</a>
-			</div>
+		<%# New view for team logos %>
+		<% @teams.each do |team| %>
+			<%= link_to team_path(team[:team_id]), onclick: "dosomething();" do %>
+				<img src="<%= team[:logo_url] %>" alt="<%= team[:team_name] %> logo">
+				<p><%= team[:team_name] %></p>
+			<% end %>
 		<% end %>
 	</div>
 </div>
