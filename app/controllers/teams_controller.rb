@@ -1,6 +1,4 @@
 class TeamsController < ApplicationController
-	before_action :set_playoff_teams
-
 	def index
 	end
 
@@ -14,16 +12,11 @@ class TeamsController < ApplicationController
 
     # Player totals for top 5 lists
     @players = NbaStatsService.team_players(team_id: team_id, season: "2024-25")
+		@playoff_players = NbaStatsService.team_players(team_id: team_id, season: "2024-25", poround: 0).map { |p| p[:player_id].to_s }
 
     # Full roster (names + photos + jersey numbers)
     @roster = NbaStatsService.team_roster(team_id: team_id, season: "2024-25")
+		puts "********* Debugging message from teams#show @roster:"
+		puts @roster.inspect
 	end
-
-	private
-
-  def set_playoff_teams
-    @teams ||= NbaStatsService.playoff_teams(season: "2024-25")
-		puts "********* Debugging message from before_action @teams:"
-		puts @teams.inspect
-  end
 end

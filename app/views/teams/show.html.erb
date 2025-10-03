@@ -1,4 +1,4 @@
-<%= render 'shared/team_header' %>
+<%= render 'shared/navbar' %>
 <!-- Main Pane -->
 <div class="main">
 	<div class="page-sub-nav col-md-12">	 
@@ -22,13 +22,19 @@
 			<!-- Repeat for rebounds, assists, etc. -->
 		</div>
 
+
 		<h2>Roster</h2>
 		<ul>
 			<% @roster.each do |player| %>
 				<li>
-					<%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
+					<% if @playoff_players.include?(player[:player_id].to_s) %>
+						<%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
+							<img src="<%= player[:photo_url] %>" alt="<%= player[:player_name] %>">
+							<%= player[:player_name] %>
+						<% end %>
+					<% else %>
 						<img src="<%= player[:photo_url] %>" alt="<%= player[:player_name] %>">
-						<%= player[:player_name] %> (#<%= player[:jersey] %>)
+						<%= player[:player_name] %> (no playoff stats)
 					<% end %>
 				</li>
 			<% end %>
