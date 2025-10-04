@@ -15,52 +15,33 @@
     <img src="http://www.webdesign.org/img_articles/13053/loading-gif-animation.gif" alt="loading" />
 </div>
  <div id="message">   
-   <h1 class="alert alert-info">Player data may take several seconds to load.<br/>Thanks for your patience.</h1>
+   <h1 class="alert alert-info">Data may take several seconds to load.<br/>Thanks for your patience.</h1>
 </div>
 
-<div class="container">
-
-<%= yield %>
-
-
-</div>
-<!-- END Container -->
-
-<div class="container">
-<!-- FOOTER -->
-<div class="f-top">	    
-</div>
-<div class="footer">
-	<div class="col-md-7">
-	  <h1>HOOP HELIX <small>A Team-Oriented Take on NBA Basketball</small></h1>
-	  <p>Hoop Helix is created, maintained, designed and developed by me >> <a href="http://raquelcps.com" target="_blank">Chicago Public Skills</a><br/>At the moment, the focus is strictly the 2015 NBA Playoffs. But there is more to come.</p>
-	  <p>Statistics, player photos, and team logos are from <a href="http://nba.com" target="_blank">NBA.com</a></p>
-	  <p>If you notice an error, let me know: BlackMambaMyth at gmail dot com</p>
-	  <br>
-	  <p>For more basketball stat fun visit my other site >> 
-	  	<a href="http://blackmambamyth.com" target="_blank">BlackMambaMyth.com</a><p>
-      
-	  <a href="https://twitter.com/BlackMambaMyth" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @BlackMambaMyth</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-	  <div class="footer-copy">
-	  	<p>Copyright Hoop Helix, Chicago Public Skills 2015</p>
-	  </div>
+<div>
+	<%= render 'shared/navbar' %>
+	<div class="container">
+		<%= yield %>
 	</div>
-	<!-- <div class="col-md-6 footer-right" >
-		<a href="http://blackmambamyth.com" target="_blank" title="Jordan, LeBron, Kobe comparison">
-		<div class="module-mj mid">
-			<h3>black</h3>
-		</div>
-		<div class="module-lj mid">
-			<h3>mamba</h3>
-		</div>
-		<div class="module-kb mid">
-			<h3>myth</h3>
-		</div>
-		</a>	 
-	</div>-->
 </div>
-<!-- END footer -->
+
+<div>
+	<!-- FOOTER -->
+	<div class="f-top">	    
+	</div>
+	<div class="footer">
+		<div class="col-md-7">
+			<h1>HOOP HELIX <small>A Team-Oriented Take on NBA Basketball</small></h1>
+			<p>Hoop Helix is created, maintained, designed and developed by me >> <a href="http://raquelcps.com" target="_blank">Chicago Public Skills</a><br/>At the moment, the focus is strictly the NBA Playoffs. </p>
+			<p>Statistics, player photos, and team logos are from <a href="http://nba.com" target="_blank">NBA.com</a></p>
+			
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<div class="footer-copy">
+				<p>Copyright Hoop Helix, Chicago Public Skills 2015</p>
+			</div>
+		</div>
+	</div>
+	<!-- END footer -->
 </div>
 
 
