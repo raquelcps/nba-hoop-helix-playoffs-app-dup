@@ -1,9 +1,9 @@
 <%= render 'shared/player_header' %>
 
-<!-- Main Pane -->
-<div class="main">
+<!-- Main Content -->
+<section>
 	<div class="page-sub-nav">
-	  <h4>Team Contribution: All Rounds<h4>  	
+	  <h4>Team Contribution: All Rounds</h4>  	
 	</div>
 	<div class="col-md-8 stat-main">
 		<h1><%= @player[:player_name] %></h1>
@@ -18,11 +18,53 @@
 			</div>
 		<!-- Repeat for assists, rebounds, etc. -->
 	</div>
+	<h3>Minutes</h3>
+	<%= debug(@player[:min]) %>
+	<%= debug(@team_totals["MIN"]) %> <!-- if i display this it should be *5 so that it reflects total minutes played by all players. Since that is waht the multiplier is for. -->
+	<div class="progress">
+		<% contribution = player_contribution(@player[:min], @team_totals["MIN"], multiplier: 5) %>
+		<div class="progress-bar"
+				role="progressbar"
+				style="width: <%= contribution %>%;">
+			<%= contribution.to_i %>%
+		</div>
+		<%= debug(contribution)%>
+	</div>
+	<h3>Points</h3>
+	<%= debug(@player[:pts]) %>
+	<%= debug(@team_totals["PTS"]) %>
+	<div class="progress">
+		<% contribution = player_contribution(@player[:pts], @team_totals["PTS"], multiplier: 1) %>
+		<div class="progress-bar"
+				role="progressbar"
+				style="width: <%= contribution %>%;">
+			<%= contribution.to_i %>%
+		</div>
+	</div>
 
-	<div class="progress">
-		<div class="progress-bar" role="progressbar" aria-valuenow="<%= (@player[:ast].to_f / @team_totals["AST"]) * 100 %>" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
-	<div class="progress">
-		<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
-</div>
+	<!-- STL -->
+	  <div class="row">
+    	<div class="col-md-5 stat-name-purple">
+	        <h3>STL</h3>
+    	</div>
+	  	<div class="col-md-6 overview-bars">	  
+	      <div class="progress">
+	          <% contribution = player_contribution(@player[:stl], @team_totals["STL"], multiplier: 1) %>
+							<div class="progress-bar"
+									role="progressbar"
+									style="width: <%= contribution %>%;">
+								<%= contribution.to_i %>%
+							</div>
+          </div>
+          <div class="row">
+		    <div class="col-xs-6 player-data-purple">
+		      <p><%= @player[:stl] %> STL</p>
+		    </div>
+		    <div class="col-xs-6 team-data" style="text-align:right">
+		      <p><%= @team_totals["STL"]%> STL</p>
+		    </div>
+		  </div>
+	    </div><!-- END overview-bars -->    	
+	  </div><!-- END STL -->
+
+</section>

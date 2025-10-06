@@ -2,11 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.team-list {
+.team-index {
 	margin-top: 35px;
+	a {
+		text-decoration: none;
+	}
+	a p {
+		letter-spacing: .05rem;
+	}
 }
 
-.team-list img {
+.team-index img {
 	width: 150px;
 }
 

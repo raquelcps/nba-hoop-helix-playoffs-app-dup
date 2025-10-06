@@ -7,13 +7,13 @@
 	</thead>
 	<% @po_team_rosters_array.each do |hash| %>
 	<tbody>
-		<td><a href="/players/<%= hash['PLAYER_ID'] %>" onclick="dosomething();"><%= hash["PLAYER_NAME"] %></a></td>
+		<td><a href="/players/<%= hash['PLAYER_ID'] %>" onclick="startLoadingAnimation();"><%= hash["PLAYER_NAME"] %></a></td>
 		
 	</tbody>
 	<% end %>
 </table>
 
-<p style="font-size: 12px;">Only players who have played in the 2015 postseason are listed for their team<p>
+<p style="font-size: 12px;">Only players who have played in the 2024-25 postseason are listed for their team<p>
 <hr>
 
 <!-- Collapse button -->

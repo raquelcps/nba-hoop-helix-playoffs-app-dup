@@ -1,29 +1,25 @@
-<!-- Partial for top of /team pages-->
-
-<!-- HEADER and NAV -->	
-<div class="full-header">
-	<nav class="navbar navbar-expand-lg page-id-header">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/">Hoop Helix</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item dropdown">
-						<a class="btn btn-default dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fa fa-users"></i> Select a playoff team <span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu" role="menu">
-							<% @teams.each do |team| %>
-								<%= link_to team_path(team[:team_id]), class: "dropdown-item" do %>
-									<p><%= team[:team_name] %></p>
-								<% end %>
+<!-- NAVBAR -->	
+<nav class="navbar navbar-expand-lg page-id-header">
+	<div class="container-fluid">
+		<a class="navbar-brand font-dosis" href="/">Hoop Helix</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item dropdown">
+					<a class="btn btn-default dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa fa-users"></i> Select a playoff team <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<% @teams.each do |team| %>
+							<%= link_to team_path(team[:team_id]), class: "dropdown-item" do %>
+								<p><%= team[:team_name] %></p>
 							<% end %>
-						</ul>
-					</li>
-				</ul>
-			</div>
+						<% end %>
+					</ul>
+				</li>
+			</ul>
 		</div>
-	</nav>
-</div><!-- END HEADER -->
+	</div>
+</nav>

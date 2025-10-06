@@ -1,3 +1,19 @@
+:root {
+  --font-dosis: 'Dosis', sans-serif;
+  --font-glegoo: 'Glegoo', serif;
+  --font-roboto: 'Roboto', sans-serif;
+}
+
+.font-dosis {
+  font-family: var(--font-dosis);
+}
+.font-glegoo {
+  font-family: var(--font-glegoo);
+}
+.font-roboto {
+  font-family: var(--font-roboto);
+}
+
 #loading {
     position: absolute;
     background-color: #fcfcfc;
@@ -28,18 +44,21 @@ text-align: center;
 	margin-top: 0px;
 }
 
-h1, h2, {
-  font-family: 'Dosis', sans-serif;
+h1, h2 {
+  font-family: var(--font-dosis);
 }
 
 h3, h4, h5 {
-  font-family: 'Glegoo', serif;
+  font-family: var(--font-glegoo);
 }
 
 body p, body a, body li, body td, body th {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-roboto);
 }
 
+/*
+Nav Styles
+*/ 
 .full-header {
 	width: 100%;
 }
@@ -47,15 +66,25 @@ body p, body a, body li, body td, body th {
 .page-id-header {
 	padding: 5px 20px;
 	background-color: #E39D44;
-  height:50px;
+  height:70px;
   border-radius: 0px;	
   margin-bottom: 0px;
   border: none;
 }
 
-.navbar-brand-custom {
-  padding: 0px;
-   height:45px;
+a.navbar-brand {
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.dropdown-menu .dropdown-item p {
+  margin-bottom: 0px;
+  padding: 0.2rem 0rem;
+}
+
+.dropdown-menu a.dropdown-item:hover {
+  background-color: #ececec;
+  border: none;
 }
 
 .navbar-brand-custom h1, .footer h1 {
@@ -67,15 +96,11 @@ body p, body a, body li, body td, body th {
   color: #333;
 }
 
-.twitter-custom {
-    margin: 0px 0px 0px 110px;
-    padding: 0px;
-
-}
-
 .navbar-right-custom {
   padding-top: 5px;
 }
+
+
 
 .player-page-name {
   height: 45px;
@@ -123,6 +148,12 @@ body p, body a, body li, body td, body th {
   padding: 0px;
   text-transform: uppercase;
 }
+.player-page-profile h4 {
+  font-size: 19px;
+  color: #777;
+  padding: 0px;
+  text-transform: uppercase;
+}
 
 .page-sub-nav .fa {
   font-size: 16px;
@@ -149,12 +180,10 @@ body p, body a, body li, body td, body th {
 
 .player-page-info {
 	margin-top: 20px;
-
 }
 
 .player-page-info img {
-	position: relative;
-	top: 0px;	
+	width:20%
 }
 
 .player-page-info h5 {
@@ -169,17 +198,8 @@ body p, body a, body li, body td, body th {
   margin-bottom: 5px;
 }
 
-.player-page-buttons {
-	margin-top: 25px;
-}
 
-.nav-pills > li.active > a, {
-	background-color: #E39D44;
-}
 
-.nav > li > a {
-	color: #E39D44;	
-}
 
 .stat-main {
   margin-top: 10px;

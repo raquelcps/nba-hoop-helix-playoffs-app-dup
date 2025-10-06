@@ -1,23 +1,25 @@
 <!-- Main Pane -->
-<div class="main">
-	<div class="page-sub-nav col-md-12">
-		<h4>Team Index</h4>
-	</div>
-	<div class="col-md-12 alert alert-info alert-dismissible alert-custom" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		Welcome to Hoop Helix. The focus right now is on the 2015 NBA Playoffs, but I have more features and improvements planned for the off-season. Thanks for visiting.
-		Blah blah blah. say soem more aobut this site. It doesn't have to be in an alert, but keep it in a box
-	</div>
-	<div class="col-md-12 team-list">
+<section>
+	<header class="page-sub-nav col-md-12">
+		<h1 class="font-dosis">HOOP HELIX</h1>
+		<div class="intro">
+			<p class="font-roboto">
+			Welcome to Hoop Helix. The focus right now is on the 2024-25 NBA Playoffs, but I have more features and improvements planned for the off-season. Thanks for visiting.
+			Blah blah blah. say soem more aobut this site. It doesn't have to be in an alert, but keep it in a box
+			</p>
+		</div>
+	</header>
+	<section class="col-md-12 team-index">
+		<h4 class="text-center mb-3">Team Index</h4>
 		<div class="row row-cols-4 g-4 text-center">
 			<% @teams.each do |team| %>
 				<div class="col">
-					<%= link_to team_path(team[:team_id]), onclick: "dosomething();" do %>
+					<%= link_to team_path(team[:team_id]), onclick: "startLoadingAnimation();" do %>
 						<img src="<%= team[:logo_url] %>" alt="<%= team[:team_name] %> logo" class="img-fluid mb-2" style="max-height: 80px;">
-						<p class="mb-0"><%= team[:team_name] %></p>
+						<p class="mb-0 font-roboto"><%= team[:team_name] %></p>
 					<% end %>
 				</div>
 			<% end %>
 		</div>
-	</div>
-</div>
+	</section>
+</section>

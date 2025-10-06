@@ -22,12 +22,15 @@
 		</div>
 
 
+
+
+
 		<h2>Roster</h2>
 		<ul>
 			<% @roster.each do |player| %>
 				<li>
 					<% if @playoff_players.include?(player[:player_id].to_s) %>
-						<%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
+						<%= link_to player_path(player[:player_id], team_id: params[:id]), onclick: "startLoadingAnimation();" do %>
 							<img src="<%= player[:photo_url] %>" alt="<%= player[:player_name] %>">
 							<%= player[:player_name] %>
 						<% end %>
@@ -38,13 +41,6 @@
 				</li>
 			<% end %>
 		</ul>
-
 		
   </div>
-  
-
-
-	
-
-</div>
-<!-- END Main -->
+</div><!-- END Main -->

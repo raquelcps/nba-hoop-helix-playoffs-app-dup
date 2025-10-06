@@ -1,65 +1,50 @@
 <!-- Partial for top of /player pages-->
 
 <!-- HEADER -->	
-<div class="full-header">
+<header class="full-header">
 	<div class="player-page-name col-md-12">
-		<h4>2015 PLAYOFFS</h4>
+		<h4>2024-25 PLAYOFFS</h4>
 	</div>
-	<% if @player.nil? %>
-		<p>No player data available.</p>
-	<% else %>
-		<div class="page-sub-nav col-md-12">
-			<!-- <i class="fa fa-user"></i> -->
-			<h4><%= @player[:player_name] %></h4>
-		</div>
-		<!-- Player Info -->
-		<div class="row player-well">
-			<div class="col-md-4 player-page-profile">
-				<div style="width: 100%">
-				<img src="<%= @player[:photo_url] %>" alt="<%= @player[:player_name] %>" width="200px">
-				</div>
-			</div> 
-		
-			<div class="col-md-4 player-page-info">
-				<h5>
-					<%= @player[:pts] %> PTS / 
-					<%= @player[:reb] %> REB / 
-					<%= @player[:ast] %> AST
-				</h5>
-				<h5>
-					<%= @player[:gp] %> GP / 
-					<%= debug(@player) %>
-				</h5>
-				<img src="https://cdn.nba.com/logos/nba/<%= @team_totals["TEAM_ID"] %>/primary/L/logo.svg">	
-				<p><%= @team_totals["TEAM_NAME"] %></p>
-				<p>Pos: <%= @player[:position] %> | Exp: <%= @player[:season_exp] %> yrs</p>
-				<p>Record: <%= @player[:w] %>W - <%= @player[:l] %>L</p>
-				<p>Games Played: <%= @team_totals["GP"] %></p>	
 
-				<p>Percentage of team points: <%= ((@player[:pts].to_f / @team_totals["PTS"]) * 100).round(2) %>%</p>
-
-			<!-- Dropdown for rounds -->
-			<div class="mb-3">
-				<%= form_with url: player_path(@player[:player_id]), method: :get, local: true do %>
-					<%= hidden_field_tag :team_id, @team_totals["TEAM_ID"] %> <!-- keep team_id when navigating -->
-					<%= label_tag :round, "Playoff Round:" %>
-					<%= select_tag :round,
-						options_for_select(
-							@available_rounds.map { |r|
-								case r
-								when 0 then ["All Rounds", 0]
-								when 1 then ["First Round", 1]
-								when 2 then ["Semifinals", 2]
-								when 3 then ["Conference Finals", 3]
-								when 4 then ["Finals", 4]
-								end
-							},
-							@selected_round # pre-select
-						),
-						onchange: "this.form.submit();" %>
-				<% end %>
+	<!-- Player Info -->
+	<div class="row player-well">
+		<div class="col-md-4 player-page-profile">
+			<div style="width: 100%">
+			<img src="<%= @player[:photo_url] %>" alt="<%= @player[:player_name] %>" width="200px">
 			</div>
+			<h4><%= @player[:player_name] %></h4>
+		</div> 
+	
+		<div class="col-md-4 player-page-info">
+			<img src="https://cdn.nba.com/logos/nba/<%= @team_totals["TEAM_ID"] %>/primary/L/logo.svg">	
+			<p><%= @team_totals["TEAM_NAME"] %></p>
+			<p>Pos: <%= @player[:position] %> | Exp: <%= @player[:exp] %> yrs</p>
+			<p>Player Record: <%= @player[:w] %>W - <%= @player[:l] %>L</p>
+			<p>Team Games Played: <%= @team_totals["GP"] %></p>	
+
+			<p>Percentage of team points: <%= ((@player[:pts].to_f / @team_totals["PTS"]) * 100).round(2) %>%</p>
 		</div>
-			<!-- End Player Info -->
-	<% end %>
-</div><!-- END PLAYER HEADER -->
+
+		<!-- Dropdown for rounds -->
+		<div class="mb-3 col-md-4">
+			<%= form_with url: player_path(@player[:player_id]), method: :get, local: true do %>
+				<%= hidden_field_tag :team_id, @team_totals["TEAM_ID"] %> <!-- keep team_id when navigating -->
+				<%= label_tag :round, "Playoff Round:" %>
+				<%= select_tag :round,
+					options_for_select(
+						@available_rounds.map { |r|
+							case r
+							when 0 then ["All Rounds", 0]
+							when 1 then ["First Round", 1]
+							when 2 then ["Semifinals", 2]
+							when 3 then ["Conference Finals", 3]
+							when 4 then ["Finals", 4]
+							end
+						},
+						@selected_round # pre-select
+					),
+					onchange: "this.form.submit();" %>
+			<% end %>
+		</div>
+	</div> <!-- END row player-well -->
+</header><!-- END PLAYER HEADER -->
