@@ -1,28 +1,17 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# WIP Refacting and updating one of the first apps I built 10 years ago
 
-Things you may want to cover:
+## Background
+In the spring of 2015 I built the original version of Hoop Helix as a capstone project while I was a student at Actualize Code School (formerly known as Anyone Can Learn To Code) in Chicago.
 
-* Ruby version
+Hoop Helix focused on basketball. I designed it to pull data from nba.com and displayed it in a way that highlighted the role of individual players in making up the team and the interactions between players.
 
-* System dependencies
+## Purpose
+I think of the original Hoop Helix as the definition of brute forcing my way through a project. There is so much duplication and mess everywhere. It's in the controllers, in the templates, in the architecture of the project in general.
 
-* Configuration
+Having stepped away from coding for a bit, I thought it would be fun and a learning opportunity to try to get Hoop Helix up and running again. Both to refresh technical skills and learn some new things.
 
-* Database creation
+Right now, this readme is a living document that I will update as I make decisions and articulate my process.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Plans are forthcoming
