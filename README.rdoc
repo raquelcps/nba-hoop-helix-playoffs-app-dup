@@ -1,17 +1,27 @@
-== README
+= WIP Refactor and update one of the first apps I built 10 years ago
+Note: This readme is a living document that I will update as I make decisions and articulate my process.
 
-# WIP Refacting and updating one of the first apps I built 10 years ago
-
-## Background
+== Background
 In the spring of 2015 I built the original version of Hoop Helix as a capstone project while I was a student at Actualize Code School (formerly known as Anyone Can Learn To Code) in Chicago.
 
-Hoop Helix focused on basketball. I designed it to pull data from nba.com and displayed it in a way that highlighted the role of individual players in making up the team and the interactions between players.
+Hoop Helix focused on basketball as a team sport. I designed the app to pull data from nba.com and display it in a way that highlights players' contributions to their teams and interactions with their teammates.
 
-## Purpose
-I think of the original Hoop Helix as the definition of brute forcing my way through a project. There is so much duplication and mess everywhere. It's in the controllers, in the templates, in the architecture of the project in general.
+I think of the original code as the definition of brute forcing my way through a project. There is so much duplication and mess everywhere. It's in the controllers, in the templates, in the architecture of the project in general.
 
-Having stepped away from coding for a bit, I thought it would be fun and a learning opportunity to try to get Hoop Helix up and running again. Both to refresh technical skills and learn some new things.
+== Purpose
+Having stepped away from coding for a bit, I thought it would be a fun learning opportunity to try to get Hoop Helix up and running again. It's a way to refresh technical skills, to learn some new things, and also to apply the knowledge I've gained since I first wrote the app.
 
-Right now, this readme is a living document that I will update as I make decisions and articulate my process.
+Since I am stepping back into the coding world, I want to feel comfortable with writing code and all the things that entails. The IDE, the command line, the process of commiting and pushing code, working with AI. I want to feel confident in the choices I'm making for how I approach this refactor and know that I can leverage my professional experience in my decision making process.
 
-## Plans are forthcoming
+Although I initially felt very intimidated with starting this project, it's proving to be a good reminder that I actually remember how to do these things. And if I don't know something, I have a good idea of how to search for an answer and figure it out. Do I know everythign? No way, but that's not ever going to be true. And it's not the point of this exercise.
+
+== Plans
+This list is incomplete but major points includes:
+* removing duplication in logic
+* removing duplication in templates
+* improving semantic HTML
+* improving CSS structure, naming and strategy
+* meeting WGAC 2.2 standards
+* adding tests
+
+
