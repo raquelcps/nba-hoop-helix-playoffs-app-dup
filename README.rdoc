@@ -1,28 +1,30 @@
-== README
+= WIP Refactor and update one of the first apps I built 10 years ago
+Note: This readme is a living document that I will update as I make decisions and articulate my process.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== Background
+In the spring of 2015 I built the original version of Hoop Helix as a capstone project while I was a student at Actualize Code School (formerly known as Anyone Can Learn To Code) in Chicago.
 
-Things you may want to cover:
+Hoop Helix focused on basketball as a team sport. I designed the app to pull data from nba.com and display it in a way that highlights players' contributions to their teams and interactions with their teammates.
 
-* Ruby version 3.3.9
+I think of the original code as the definition of brute forcing my way through a project. There is so much duplication and mess everywhere. It's in the controllers, in the templates, in the architecture of the project in general.
 
-* System dependencies
+== Purpose
+Having stepped away from coding for a bit, I thought it would be a fun learning opportunity to try to get Hoop Helix up and running again. It's a way to refresh technical skills, to learn some new things, and also to apply the knowledge I've gained since I first wrote the app.
 
-* Configuration
+Since I am stepping back into the coding world I want to feel comfortable with writing code and all the things that entails – the IDE, the command line, the process of committing and pushing code, working with AI. I want to gain confidence in processes that I have historically felt less engaged with (like updating tools and libraries) or have little experience with by forcing myself to do those things.
 
-* Database creation
+The goal for me is twofold: 
+1. Get the refactored app running and deployed
+2. Use the process of refactoring and deploying to regain confidence in my skills and decision making
 
-* Database initialization
+Although I initially felt very intimidated when I started this project, it's proving to be a good reminder that I actually remember how to do these things, that I have years of professional experience. And if I don't know something, I have a good idea of how to search for an answer and figure it out. Do I know everything? No way, but that's not ever going to be true. And it's not the purpose of this exercise.
 
-* How to run the test suite
+== Plans
+I think I'm going to use the Wiki section to articulate my plans more fully, but until then here's a list of major points of emphasis:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* removing duplication in logic
+* removing duplication in templates
+* improving semantic HTML
+* improving CSS structure, naming and strategy
+* meeting WGAC 2.2 standards
+* adding tests
