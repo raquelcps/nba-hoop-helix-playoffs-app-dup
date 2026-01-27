@@ -1,6 +1,12 @@
 = WIP Refactor and update one of the first apps I built 10 years ago
 Note: This readme is a living document that I will update as I make decisions and articulate my process.
 
+  
+  UPDATE JAN 2026: 
+  This project has been on hold over the past few months while I tend to life priorities - mostly good things, thankfully.
+  I'll ease back into it as the Minnesota ice thaws out.
+
+
 == Background
 In the spring of 2015 I built the original version of Hoop Helix as a capstone project while I was a student at Actualize Code School (formerly known as Anyone Can Learn To Code) in Chicago.
 
