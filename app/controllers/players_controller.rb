@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
+	include PlayersHelper # to access helper methods, but this is not good practice
 
-	def index
+  def index
 	end
 
   def show
@@ -21,12 +22,16 @@ class PlayersController < ApplicationController
 
     # Get team totals for the selected round (so percentages update correctly)
     @team_totals = NbaStatsService.team_totals(team_id: team_id, season: "2024-25", poround: selected_round)
+    puts "********* Debugging message from players#show @team_totals:"
+    puts @team_totals
 
     # Player’s stats for the selected round
     players_in_round = NbaStatsService.team_players(team_id: team_id, season: "2024-25", poround: selected_round)
+    puts "********* Debugging message from players#show players_in_round:"
+    puts players_in_round
     @player = players_in_round.find { |p| p[:player_id].to_s == player_id.to_s }
     puts "********* Debugging message from players#show @player:"
-    puts @player.inspect
+    puts @player
 
     # Collect available rounds (only include if the player actually has stats in that round)
 
@@ -45,5 +50,14 @@ class PlayersController < ApplicationController
     # end
 
     @selected_round = selected_round
+
+    # @stats_to_show = ["PTS", "REB", "AST", "FGM", "FGA"]
+    @stats_to_show = [":pts", ":reb", ":ast", ":fgm", ":fga"]
+    puts "<<<<<<debugging message before calling player_contribution_stats: @player = #{@player}"
+    puts "<<<<<<debugging message before calling player_contribution_stats: @team_totals = #{@team_totals}"
+    puts "<<<<<<debugging message before calling player_contribution_stats: @stats_to_show = #{@stats_to_show}"
+    @player_contributions = player_contribution_stats(@player, @team_totals, stats: @stats_to_show)
+    puts "@stats_to_show: #{@stats_to_show}"
+    puts "@player_contributions: #{@player_contributions}"
   end  
 end

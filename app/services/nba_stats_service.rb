@@ -62,7 +62,40 @@ class NbaStatsService
         PlusMinus: "N",
         Rank: "N",
       })
-      normalize_result(response).first
+      # normalize_result(response).first
+      stats = normalize_result(response).first
+      return nil unless stats
+      
+      {
+        team_id:      stats["TEAM_ID"],
+        team_name:    stats["TEAM_NAME"],
+        gp:           stats["GP"],
+        w:            stats["W"],
+        l:            stats["L"],
+        w_pct:        stats["W_PCT"],
+        min:          stats["MIN"],
+        fgm:          stats["FGM"],
+        fga:          stats["FGA"],
+        fg_pct:       stats["FG_PCT"],
+        fg3m:         stats["FG3M"],
+        fg3a:         stats["FG3A"],
+        fg3_pct:      stats["FG3_PCT"],
+        ftm:          stats["FTM"],
+        fta:          stats["FTA"],
+        ft_pct:       stats["FT_PCT"],
+        oreb:         stats["OREB"],
+        dreb:         stats["DREB"],
+        reb:          stats["REB"],
+        ast:          stats["AST"],
+        tov:          stats["TOV"],
+        stl:          stats["STL"],
+        blk:          stats["BLK"],
+        blka:         stats["BLKA"],
+        pf:           stats["PF"],
+        pfd:          stats["PFD"],
+        pts:          stats["PTS"],
+        plus_minus:   stats["PLUS_MINUS"]
+      }.with_indifferent_access
     end
   end
 
@@ -167,10 +200,10 @@ class NbaStatsService
     url = "#{BASE_URL}/#{endpoint}"
     response = HTTParty.get(url, query: params, headers: DEFAULT_HEADERS)
     if response.code == 200
-        puts "Debugging message response code: #{response.code}"
-      else
-        Rails.logger.error "API error for player touches: #{response.code} - #{response.body}"
-      end
+      puts "Debugging message response code: #{response.code}"
+    else
+      Rails.logger.error "API error for player touches: #{response.code} - #{response.body}"
+    end
     puts "NBA API response for #{endpoint}:"
     puts response
     puts "url:"
@@ -181,7 +214,9 @@ class NbaStatsService
   end
 
   def self.normalize_result(response)
+    puts "******** normalizing response: #{response.inspect}"
     result_set = response["resultSets"].first
+    puts "********* normalizing result_set: #{result_set.inspect}"
     headers = result_set["headers"]
     result_set["rowSet"].map { |row| headers.zip(row).to_h }
     # Rails.logger.debug "Keys in normalize_result: #{rows.first.keys.inspect}" if rows.any?

@@ -10,19 +10,20 @@
 		<div class="stats-grid">
 			<div>
 				<h3>Points</h3>
-				<p><%= @player[:pts] %> / <%= @team_totals["PTS"] %> team points</p>
-				<p>Percentage of team points: <%= ((@player[:pts].to_f / @team_totals["PTS"]) * 100).round(2) %>%</p>
+				<p><%= @player[:pts] %> / <%= @team_totals["pts"] %> team points</p>
+				<% points_contribution = player_contribution(@player[:pts], @team_totals["pts"]) %>
+				<p>Percentage of team points: <%= points_contribution %>%</p>
 				<div class="bar">
-					<div class="player-bar" style="width: <%= (@player[:pts].to_f / @team_totals["PTS"]) * 100 %>%"></div>
+					<div class="player-bar" style="width: <%= points_contribution %>%"></div>
 				</div>
 			</div>
 		<!-- Repeat for assists, rebounds, etc. -->
 	</div>
 	<h3>Minutes</h3>
 	<%= debug(@player[:min]) %>
-	<%= debug(@team_totals["MIN"]) %> <!-- if i display this it should be *5 so that it reflects total minutes played by all players. Since that is waht the multiplier is for. -->
+	<%= debug(@team_totals["min"]) %> <!-- if i display this it should be *5 so that it reflects total minutes played by all players. Since that is waht the multiplier is for. -->
 	<div class="progress">
-		<% contribution = player_contribution(@player[:min], @team_totals["MIN"], multiplier: 5) %>
+		<% contribution = player_contribution(@player[:min], @team_totals["min"], multiplier: 5) %>
 		<div class="progress-bar"
 				role="progressbar"
 				style="width: <%= contribution %>%;">
@@ -32,9 +33,9 @@
 	</div>
 	<h3>Points</h3>
 	<%= debug(@player[:pts]) %>
-	<%= debug(@team_totals["PTS"]) %>
+	<%= debug(@team_totals["pts"]) %>
 	<div class="progress">
-		<% contribution = player_contribution(@player[:pts], @team_totals["PTS"], multiplier: 1) %>
+		<% contribution = player_contribution(@player[:pts], @team_totals["pts"], multiplier: 1) %>
 		<div class="progress-bar"
 				role="progressbar"
 				style="width: <%= contribution %>%;">
@@ -43,28 +44,43 @@
 	</div>
 
 	<!-- STL -->
-	  <div class="row">
-    	<div class="col-md-5 stat-name-purple">
-	        <h3>STL</h3>
-    	</div>
-	  	<div class="col-md-6 overview-bars">	  
-	      <div class="progress">
-	          <% contribution = player_contribution(@player[:stl], @team_totals["STL"], multiplier: 1) %>
-							<div class="progress-bar"
-									role="progressbar"
-									style="width: <%= contribution %>%;">
-								<%= contribution.to_i %>%
-							</div>
-          </div>
-          <div class="row">
-		    <div class="col-xs-6 player-data-purple">
-		      <p><%= @player[:stl] %> STL</p>
-		    </div>
-		    <div class="col-xs-6 team-data" style="text-align:right">
-		      <p><%= @team_totals["STL"]%> STL</p>
-		    </div>
-		  </div>
-	    </div><!-- END overview-bars -->    	
-	  </div><!-- END STL -->
+	<div class="row">
+		<div class="col-md-5 stat-name-purple">
+				<h3>STL</h3>
+		</div>
+		<div class="col-md-6 overview-bars">	  
+			<div class="progress">
+					<% contribution = player_contribution(@player[:stl], @team_totals["stl"], multiplier: 1) %>
+						<div class="progress-bar"
+								role="progressbar"
+								style="width: <%= contribution %>%;">
+							<%= contribution.to_i %>%
+						</div>
+				</div>
+				<div class="row">
+			<div class="col-xs-6 player-data-purple">
+				<p><%= @player[:stl] %> STL</p>
+			</div>
+			<div class="col-xs-6 team-data" style="text-align:right">
+				<p><%= @team_totals["stl"]%> STL</p>
+			</div>
+		</div>
+		</div><!-- END overview-bars -->    	
+	</div><!-- END STL -->
+
+	<% @stats_to_show.each do |stat| %>
+		<% contribution = @player_contributions[stat] %>
+
+		<div class="stat">
+			<strong><%= stat %>:</strong>
+			<div class="progress" style="height: 1.5rem;">
+				<div class="progress-bar"
+						role="progressbar"
+						style="width: <%= contribution %>%;">
+					<%= contribution.to_i %>%
+				</div>
+			</div>
+		</div>
+	<% end %>
 
 </section>

@@ -1,17 +1,17 @@
 <!-- Main Pane -->
 <div class="main">
 	<div class="page-sub-nav col-md-12">	 
-	  	<h4><%= @team_totals["TEAM_NAME"] %></h4> 	 	
+	  	<h4><%= @team_totals["team_name"] %></h4>
 	</div>
 	<div class="row">
     <div class="col-md-4 team-page-profile">
-      <img src="https://cdn.nba.com/logos/nba/<%= @team_totals["TEAM_ID"] %>/primary/L/logo.svg">
+      <img src="https://cdn.nba.com/logos/nba/<%= @team_totals["team_id"] %>/primary/L/logo.svg">
     </div>
 
 		<div class="stats-grid">
 			<div>
 				<h3>Points</h3>
-				<p>Total: <%= @team_totals["PTS"] %></p>
+				<p>Total: <%= @team_totals["pts"] %></p>
 				<ul>
 					<% @players.sort_by { |p| -p[:pts] }.take(5).each do |player| %>
 						<li><%= player[:player_name] %>: <%= player[:pts] %></li>

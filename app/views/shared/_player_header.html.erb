@@ -16,19 +16,19 @@
 		</div> 
 	
 		<div class="col-md-4 player-page-info">
-			<img src="https://cdn.nba.com/logos/nba/<%= @team_totals["TEAM_ID"] %>/primary/L/logo.svg">	
-			<p><%= @team_totals["TEAM_NAME"] %></p>
+			<img src="https://cdn.nba.com/logos/nba/<%= @team_totals[:team_id] %>/primary/L/logo.svg">
+			<p><%= @team_totals[:team_name] %></p>
 			<p>Pos: <%= @player[:position] %> | Exp: <%= @player[:exp] %> yrs</p>
 			<p>Player Record: <%= @player[:w] %>W - <%= @player[:l] %>L</p>
-			<p>Team Games Played: <%= @team_totals["GP"] %></p>	
+			<p>Team Games Played: <%= @team_totals[:gp] %></p>
 
-			<p>Percentage of team points: <%= ((@player[:pts].to_f / @team_totals["PTS"]) * 100).round(2) %>%</p>
+			<p>Percentage of team points: <%= player_contribution(@player[:pts], @team_totals[:pts]) %>%</p>
 		</div>
 
 		<!-- Dropdown for rounds -->
 		<div class="mb-3 col-md-4">
 			<%= form_with url: player_path(@player[:player_id]), method: :get, local: true do %>
-				<%= hidden_field_tag :team_id, @team_totals["TEAM_ID"] %> <!-- keep team_id when navigating -->
+				<%= hidden_field_tag :team_id, @team_totals[:team_id] %> <!-- keep team_id when navigating -->
 				<%= label_tag :round, "Playoff Round:" %>
 				<%= select_tag :round,
 					options_for_select(
