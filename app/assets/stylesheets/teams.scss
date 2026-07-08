@@ -206,37 +206,37 @@ top: 3px;
   font-size: 0.8rem;
   color: #666;
 }
-// I don't think this is used anywhere, but keeping it for now
+//
 .category-card__expand {
   width: 100%;
-  margin-top: 0.75rem;
-}
-
-.category-card__details {
-  margin-top: .75rem;
-	font-size: 0.8rem;
-	color: #666;
-	border-top: 1px solid #ddd;
-	padding-top: 0.5rem;
-}
-
-.category-card__details summary {
-  cursor: pointer;
-  text-align: center;
+  font-size: .8rem;
   color: #666;
-  list-style: none;
+  text-decoration: none;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem;
+
+	border-top: 1px solid #eee;
+  margin-top: 1rem;
+  padding-top: .75rem;
 }
 
-.category-card__details summary::-webkit-details-marker {
-  display: none;
+.expand-text {
+  transition: opacity 0.25s ease;
 }
 
-.category-card__details summary::after {
-  content: " ▼";
+.category-card__expand:hover {
+  color: #333;
+  text-decoration: none;
 }
 
-.category-card__details[open] summary::after {
-  content: " ▲";
+.category-card__expand .expand-icon {
+  transition: transform .25s ease;
+}
+
+.category-card__expand:not(.collapsed) .expand-icon {
+  transform: rotate(180deg);
 }
 // 
 .category-grid {
@@ -327,4 +327,16 @@ top: 3px;
   text-decoration: none;
 	border-radius: 6px;
   transition: background-color .15s ease;
+}
+
+//Highlight player in category card
+.player-highlight {
+  background: #f5f5f5;
+  border-radius: 4px;
+  transition: background-color .15s ease;
+}
+
+.player-highlight .player-name,
+.player-highlight .roster-player__name {
+  font-weight: 600;
 }

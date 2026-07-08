@@ -4,9 +4,11 @@
     Roster
   </h3>
 
-  <% @roster.sort_by { |player| [player[:last_name], player[:first_name]] }.each do |player| %>
+  <% @roster.sort_by { |player| player_last_name(player) }.each do |player| %>
 
-    <div class="roster-player">
+    <div 
+      class="roster-player"
+      data-player-id="<%= player[:player_id] %>">
       <% if @playoff_players.include?(player[:player_id].to_s) %>
         <%= link_to player_path(player[:player_id], team_id: params[:id]), onclick: "startLoadingAnimation();" do %>
 
@@ -17,6 +19,7 @@
           <div class="roster-player__content">
             <div class="roster-player__name">
               <%= player[:player_name] %>
+              <i class="fa fa-external-link"></i>
             </div>
 
             <div class="roster-player__meta">

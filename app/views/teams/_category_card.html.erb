@@ -14,7 +14,8 @@
         <% value = player[stat] || 0 %>
         <% percentage = team_total.to_f.zero? ? 0 : (value.to_f / team_total * 100) %>
 
-        <tr>
+        <tr data-player-id="<%= player[:player_id] %>"
+            class="category-card__row">
           <td class="player-rank">
             <%= index + 1 %>
           </td>
@@ -36,11 +37,24 @@
     </tbody>
   </table>
 
-  <details class="category-card__details">
+  <button
+    class="category-card__expand btn btn-link collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#players-<%= stat %>"
+    aria-expanded="false"
+    aria-controls="players-<%= stat %>">
 
-    <summary>
-      Show <%= players.size - 5 %> More
-    </summary>
+    <span class="expand-text">Full roster contributions</span>
+
+    <span class="expand-icon">
+      ▼
+    </span>
+  </button>
+
+  <div
+    class="collapse"
+    id="players-<%= stat %>">
 
     <table class="category-card__table">
 
@@ -54,7 +68,7 @@
           <% value = player[stat] || 0 %>
           <% percentage = team_total.to_f.zero? ? 0 : value.to_f / team_total * 100 %>
 
-          <tr>
+          <tr data-player-id="<%= player[:player_id] %>">
 
             <td class="player-rank">
               <%= index + 6 %>
@@ -95,6 +109,6 @@
 
     </table>
 
-  </details>
+  </div>
 
 </div>
