@@ -1,46 +1,61 @@
 <!-- Main Pane -->
 <div class="main">
-	<div class="page-sub-nav col-md-12">	 
-	  	<h4><%= @team_totals["team_name"] %></h4>
-	</div>
-	<div class="row">
-    <div class="col-md-4 team-page-profile">
-      <img src="https://cdn.nba.com/logos/nba/<%= @team_totals["team_id"] %>/primary/L/logo.svg">
-    </div>
+	<header class="full-header">
+		<div class="team-page-header">
+			<p class="team-page-header__season">
+				2024-25 PLAYOFFS
+			</p>
+			<h1 class="team-page-header__title">
+				<%= @team_totals["team_name"] %>
+			</h1>
 
-		<div class="stats-grid">
-			<div>
-				<h3>Points</h3>
-				<p>Total: <%= @team_totals["pts"] %></p>
-				<ul>
-					<% @players.sort_by { |p| -p[:pts] }.take(5).each do |player| %>
-						<li><%= player[:player_name] %>: <%= player[:pts] %></li>
-					<% end %>
-				</ul>
+			<p class="team-page-header__subtitle">
+				Team Profile
+			</p>
+		</div>
+	</header>
+	<div class="row">
+
+		<div class="col-lg-9">
+			<%
+			stat_categories = [
+				{ title: "Minutes",      stat: :min,     total: @team_totals["min"] },
+				{ title: "Touches",      stat: :touches, total: @team_totals["touches"] },
+				{ title: "Points",       stat: :pts,     total: @team_totals["pts"] },
+				{ title: "FG Made",      stat: :fgm,     total: @team_totals["fgm"] },
+				{ title: "FG Attempted", stat: :fga,     total: @team_totals["fga"] },
+				{ title: "3PT Made",     stat: :fg3m,    total: @team_totals["fg3m"] },
+				{ title: "3PT Attempted",stat: :fg3a,    total: @team_totals["fg3a"] },
+				{ title: "FT Made",      stat: :ftm,     total: @team_totals["ftm"] },
+				{ title: "FT Attempted", stat: :fta,     total: @team_totals["fta"] },
+				{ title: "Rebounds",     stat: :reb,     total: @team_totals["reb"] },
+				{ title: "Off Reb",      stat: :oreb,    total: @team_totals["oreb"] },
+				{ title: "Def Reb",      stat: :dreb,    total: @team_totals["dreb"] },
+				{ title: "Assists",      stat: :ast,     total: @team_totals["ast"] },
+				{ title: "Steals",       stat: :stl,     total: @team_totals["stl"] },
+				{ title: "Blocks",       stat: :blk,     total: @team_totals["blk"] },
+				{ title: "Personal Fouls Drawn", stat: :pfd, total: @team_totals["pfd"] },
+				{ title: "Turnovers",    stat: :tov,     total: @team_totals["tov"] },
+				{ title: "Blocks Against",   stat: :blka, total: @team_totals["blka"] },
+				{ title: "Personal Fouls", stat: :pf,    total: @team_totals["pf"] },
+				]
+				%>
+
+			<div class="category-grid">
+				<% stat_categories.each do |category| %>
+					<%= render "category_card",
+						title: category[:title],
+						stat: category[:stat],
+						team_total: category[:total],
+						players: @players %>
+				<% end %>
 			</div>
 			<!-- Repeat for rebounds, assists, etc. -->
 		</div>
 
-
-
-
-
-		<h2>Roster</h2>
-		<ul>
-			<% @roster.each do |player| %>
-				<li>
-					<% if @playoff_players.include?(player[:player_id].to_s) %>
-						<%= link_to player_path(player[:player_id], team_id: params[:id]), onclick: "startLoadingAnimation();" do %>
-							<img src="<%= player[:photo_url] %>" alt="<%= player[:player_name] %>">
-							<%= player[:player_name] %>
-						<% end %>
-					<% else %>
-						<img src="<%= player[:photo_url] %>" alt="<%= player[:player_name] %>">
-						<%= player[:player_name] %> (no playoff stats)
-					<% end %>
-				</li>
-			<% end %>
-		</ul>
+		<div class="col-lg-3">
+			<%= render "roster_directory" %>
+		</div>		
 		
   </div>
 </div><!-- END Main -->

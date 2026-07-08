@@ -1,0 +1,100 @@
+<div class="category-card">
+  <div class="category-card__header">
+    <h5><%= title %></h5>
+    <span class="team-total">Team: <%= team_total %></span>
+  </div>
+
+  <table class="category-card__table">
+    <tbody>
+      <% players
+          .sort_by { |player| -(player[stat] || 0) }
+          .take(5)
+          .each_with_index do |player, index| %>
+
+        <% value = player[stat] || 0 %>
+        <% percentage = team_total.to_f.zero? ? 0 : (value.to_f / team_total * 100) %>
+
+        <tr>
+          <td class="player-rank">
+            <%= index + 1 %>
+          </td>
+
+          <td class="player-name">
+            <%= player[:player_name] %>
+          </td>
+
+          <td class="player-value">
+            <%= value %>
+          </td>
+
+          <td class="player-percent">
+            <%= number_to_percentage(percentage, precision: 1) %>
+          </td>
+        </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+
+  <details class="category-card__details">
+
+    <summary>
+      Show <%= players.size - 5 %> More
+    </summary>
+
+    <table class="category-card__table">
+
+      <tbody>
+
+        <% players
+            .sort_by { |player| -(player[stat] || 0) }
+            .drop(5)
+            .each_with_index do |player, index| %>
+
+          <% value = player[stat] || 0 %>
+          <% percentage = team_total.to_f.zero? ? 0 : value.to_f / team_total * 100 %>
+
+          <tr>
+
+            <td class="player-rank">
+              <%= index + 6 %>
+            </td>
+
+            <td class="player-name">
+
+              <div class="player-info">
+
+                <span class="player-label">
+                  <%= player[:player_name] %>
+                </span>
+
+                <div class="contribution-bar">
+                  <div
+                    class="contribution-bar__fill"
+                    style="width:<%= percentage %>%">
+                  </div>
+                </div>
+
+              </div>
+
+            </td>
+
+            <td class="player-value">
+              <%= value %>
+            </td>
+
+            <td class="player-percent">
+              <%= number_to_percentage(percentage, precision: 1) %>
+            </td>
+
+          </tr>
+
+        <% end %>
+
+      </tbody>
+
+    </table>
+
+  </details>
+
+</div>

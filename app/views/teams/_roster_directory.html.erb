@@ -1,0 +1,46 @@
+<div class="team-roster">
+
+  <h3 class="team-roster__title">
+    Roster
+  </h3>
+
+  <% @roster.sort_by { |player| [player[:last_name], player[:first_name]] }.each do |player| %>
+
+    <div class="roster-player">
+      <% if @playoff_players.include?(player[:player_id].to_s) %>
+        <%= link_to player_path(player[:player_id], team_id: params[:id]), onclick: "startLoadingAnimation();" do %>
+
+          <%= image_tag player[:photo_url],
+            class: "roster-player__photo",
+            alt: player[:player_name] %>
+
+          <div class="roster-player__content">
+            <div class="roster-player__name">
+              <%= player[:player_name] %>
+            </div>
+
+            <div class="roster-player__meta">
+              #<%= player[:jersey] %>
+              &bull;
+              <%= player[:position] %>
+              &bull;
+              <%= player[:exp] %> yrs
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= image_tag player[:photo_url],
+          class: "roster-player__photo",
+          alt: player[:player_name] %>
+        <div class="roster-player__content">
+          <div class="roster-player__name">
+            <%= player[:player_name] %> (no playoff stats)
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% end %>
+
+</div>
