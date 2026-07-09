@@ -172,30 +172,29 @@ a.navbar-brand {
 	padding: 3px 15px;
 }
 
-.player-page-profile {
+.player-profile-card {
+  border-bottom: 1px solid #e8ebee96;
+}
+
+.player-profile-img {
   text-align: center;
   margin-top: 20px;
  }
 
 
-.player-page-info {
+.player-profile-info {
+  margin-bottom: 20px;
 	margin-top: 20px;
 }
 
-.player-page-info img {
-	width:20%
-}
-
-.player-page-info h5 {
-  font-size: 18px;
-  color: #494242;
-}
-
-.player-page-info p {
+.player-profile-info p {
   font-size: 14px;
   font-weight: 400;
   color: #494242;
-  margin-bottom: 5px;
+}
+
+.playoff-round-selector {
+  margin-top: 2rem;
 }
 
 
@@ -403,4 +402,13 @@ text-transform: lowercase;
 
 .alert-custom {
   padding: 10px 35px;
+}
+
+@media (max-width: 991px) {
+  .player-page-profile {
+    margin-bottom: 1rem;
+  }
+  .playoff-round-selector {
+    margin-top: 1rem;
+  }
 }

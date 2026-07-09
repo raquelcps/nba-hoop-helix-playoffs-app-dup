@@ -1,0 +1,37 @@
+<div class="contribution-bar">
+
+    <p class="contribution-label">
+      Contribution to Team
+    </p>
+
+  <div class="d-flex align-items-center gap-2">
+
+    <div class="progress flex-grow-1"
+        style="height: 20px;">
+
+      <div class="progress-bar contribution-fill"
+          role="progressbar"
+          style="width: <%= format_contribution_percentage(contribution) %>%;">
+      </div>
+
+    </div>
+
+    <span class="contribution-percent mb-3">
+      <%= format_contribution_percentage(contribution) %>%
+    </span>
+  </div>
+
+  <div class="d-flex small justify-content-between">
+
+    <span class="player-value">
+      <%= format_contribution_percentage(player_value, precision: 0) %>
+    </span>
+
+
+    <span class="team-value text-muted">
+      <%= format_contribution_percentage(team_value, precision: 0) %>
+    </span>
+
+  </div>
+
+</div>

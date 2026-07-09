@@ -22,16 +22,10 @@ class PlayersController < ApplicationController
 
     # Get team totals for the selected round (so percentages update correctly)
     @team_totals = NbaStatsService.team_totals(team_id: team_id, season: "2024-25", poround: selected_round)
-    puts "********* Debugging message from players#show @team_totals:"
-    puts @team_totals
 
     # Player’s stats for the selected round
     players_in_round = NbaStatsService.team_players(team_id: team_id, season: "2024-25", poround: selected_round)
-    puts "********* Debugging message from players#show players_in_round:"
-    puts players_in_round
     @player = players_in_round.find { |p| p[:player_id].to_s == player_id.to_s }
-    puts "********* Debugging message from players#show @player:"
-    puts @player
 
     # Collect available rounds (only include if the player actually has stats in that round)
 
@@ -43,21 +37,55 @@ class PlayersController < ApplicationController
       end
     end
 
-    # og
-    # @available_rounds = [0, 1, 2, 3, 4].select do |round|
-    #   stats = NbaStatsService.team_players(team_id: team_id, season: "2024-25", poround: round)
-    #   stats.any? { |p| p[:player_id].to_s == player_id.to_s }
-    # end
-
     @selected_round = selected_round
 
-    # @stats_to_show = ["PTS", "REB", "AST", "FGM", "FGA"]
-    @stats_to_show = [":pts", ":reb", ":ast", ":fgm", ":fga"]
-    puts "<<<<<<debugging message before calling player_contribution_stats: @player = #{@player}"
-    puts "<<<<<<debugging message before calling player_contribution_stats: @team_totals = #{@team_totals}"
-    puts "<<<<<<debugging message before calling player_contribution_stats: @stats_to_show = #{@stats_to_show}"
+    @selected_round_label =
+      case @selected_round
+      when 1
+        "First Round"
+      when 2
+        "Semifinals"
+      when 3
+        "Conference Finals"
+      when 4
+        "Finals"
+      else
+        "All Rounds"
+      end
+
+    @stats_to_show = [
+      :min,
+      :pts,
+      :fgm,
+      :fga,
+      :fg3m,
+      :fg3a,
+      :ftm,
+      :fta,
+      :reb,
+      :oreb,
+      :dreb,
+      :ast,
+      :stl,
+      :blk,
+      :pfd,
+      :tov,
+      :blka,
+      :pf,
+    ]
+
     @player_contributions = player_contribution_stats(@player, @team_totals, stats: @stats_to_show)
-    puts "@stats_to_show: #{@stats_to_show}"
-    puts "@player_contributions: #{@player_contributions}"
+
+    all_player_rankings =
+      player_rankings(
+        players_in_round,
+        stats: @stats_to_show
+      )
+
+    @player_rankings =
+      @stats_to_show.index_with do |stat|
+        all_player_rankings[stat][@player[:player_id]]
+      end
+
   end  
 end

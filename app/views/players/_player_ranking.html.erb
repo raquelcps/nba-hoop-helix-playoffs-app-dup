@@ -1,0 +1,34 @@
+<div class="player-ranking">
+
+  <p class="ranking-label">
+    Team Rank
+  </p>
+
+  <div class="ranking-context">
+    <!-- Previous Rank Context -->
+    <% if ranking[:above] %>
+      <div class="rank-node neighbor">
+        <span class="rank-num">#<%= ranking[:above][:rank] %></span>
+        <span class="rank-value"><%= format_contribution_percentage(ranking[:above][:value], precision: 0) %></span>
+      </div>
+    <% end %>
+
+    <!-- Connecting Line Behind Nodes -->
+    <div class="rank-track"></div>
+
+    <!-- Active Player Node -->
+    <div class="rank-node active">
+      <%# <div class="active-badge">You</div> %>
+      <span class="rank-num">#<%= ranking[:rank] %></span>
+      <span class="rank-value"><%= format_contribution_percentage(ranking[:value], precision: 0) %></span>
+    </div>
+
+    <!-- Next Rank Context -->
+    <% if ranking[:below] %>
+      <div class="rank-node neighbor">
+        <span class="rank-num">#<%= ranking[:below][:rank] %></span>
+        <span class="rank-value"><%= format_contribution_percentage(ranking[:below][:value], precision: 0) %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

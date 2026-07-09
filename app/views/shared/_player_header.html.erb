@@ -1,50 +1,120 @@
 <!-- Partial for top of /player pages-->
 
 <!-- HEADER -->	
-<header class="full-header">
-	<div class="player-page-name col-md-12">
-		<h4>2024-25 PLAYOFFS</h4>
+<header class="page-header mb-4">
+
+  <p class="text-uppercase text-muted mb-1">
+    2024-25 PLAYOFFS
+  </p>
+
+  <h1 class="display-6 mb-1">
+    <%= @player[:player_name] %>
+  </h1>
+
+  <p class="text-muted">
+    Player Profile
+  </p>
+
+
+	<!-- Player profile -->
+	<div class="card border-0 shadow-sm mb-5">
+
+		<div class="card-body">
+
+			<div class="row player-profile-card align-items-end">
+
+				<div class="player-profile-img col-lg-4">
+
+					<!-- Player photo -->
+					<img
+						src="<%= @player[:photo_url] %>"
+						alt="<%= @player[:player_name] %>"
+						class="mx-auto d-block"
+						width="250">
+				</div>
+
+				<div class="player-profile-info col-lg-3">
+					
+					<p class="mb-1">
+						<strong>Team</strong>
+						<%= @team_totals[:team_name] %>
+					</p>
+
+							<p class="mb-1">
+								<strong>Record</strong>
+								<%= @player[:w] %>–<%= @player[:l] %>
+							</p>
+
+							<p class="mb-2">
+								<strong>Team GP</strong>
+								<%= @team_totals[:gp] %>
+							</p>
+
+							<p class="mb-1">
+								<strong>No.</strong>
+								<%= @player[:jersey] %>
+							</p>
+
+							<p class="mb-1">
+								<strong>Position</strong>
+								<%= @player[:position] %>
+							</p>
+
+							<p class="mb-0">
+								<strong>Experience</strong>
+								<%= @player[:exp] %> years
+							</p>
+						</div>
+			</div>
+				<div class="playoff-round-selector row mb-1">
+					<div class="col-lg-3">
+
+					<!-- Round selector -->
+					<h6 class="text-uppercase text-muted mb-3">
+							Playoff Round
+					</h6>
+
+					<%= form_with url: player_path(@player[:player_id]), method: :get, local: true do %>
+
+							<%= hidden_field_tag :team_id, @team_totals[:team_id] %>
+
+							<%= select_tag(
+									:round,
+									options_for_select(
+											@available_rounds.map { |r|
+
+													case r
+
+													when 0
+															["All Rounds",0]
+
+													when 1
+															["First Round",1]
+
+													when 2
+															["Semifinals",2]
+
+													when 3
+															["Conference Finals",3]
+
+													when 4
+															["Finals",4]
+
+													end
+
+											},
+											@selected_round
+									),
+									class: "form-select",
+									onchange: "this.form.submit();"
+							) %>
+
+					<% end %>
+				</div>
+
+</div>
+		</div>
+
 	</div>
 
-	<!-- Player Info -->
-	<div class="row player-well">
-		<div class="col-md-4 player-page-profile">
-			<div style="width: 100%">
-			<img src="<%= @player[:photo_url] %>" alt="<%= @player[:player_name] %>" width="200px">
-			</div>
-			<h4><%= @player[:player_name] %></h4>
-		</div> 
-	
-		<div class="col-md-4 player-page-info">
-			<img src="https://cdn.nba.com/logos/nba/<%= @team_totals[:team_id] %>/primary/L/logo.svg">
-			<p><%= @team_totals[:team_name] %></p>
-			<p>Pos: <%= @player[:position] %> | Exp: <%= @player[:exp] %> yrs</p>
-			<p>Player Record: <%= @player[:w] %>W - <%= @player[:l] %>L</p>
-			<p>Team Games Played: <%= @team_totals[:gp] %></p>
-
-			<p>Percentage of team points: <%= player_contribution(@player[:pts], @team_totals[:pts]) %>%</p>
-		</div>
-
-		<!-- Dropdown for rounds -->
-		<div class="mb-3 col-md-4">
-			<%= form_with url: player_path(@player[:player_id]), method: :get, local: true do %>
-				<%= hidden_field_tag :team_id, @team_totals[:team_id] %> <!-- keep team_id when navigating -->
-				<%= label_tag :round, "Playoff Round:" %>
-				<%= select_tag :round,
-					options_for_select(
-						@available_rounds.map { |r|
-							case r
-							when 0 then ["All Rounds", 0]
-							when 1 then ["First Round", 1]
-							when 2 then ["Semifinals", 2]
-							when 3 then ["Conference Finals", 3]
-							when 4 then ["Finals", 4]
-							end
-						},
-						@selected_round # pre-select
-					),
-					onchange: "this.form.submit();" %>
-			<% end %>
-		</div>
-	</div> <!-- END row player-well -->
 </header><!-- END PLAYER HEADER -->
