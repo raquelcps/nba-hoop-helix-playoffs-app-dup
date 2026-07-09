@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   private
   
   def set_playoff_teams
-   @teams ||= NbaStatsService.playoff_teams(season: "2024-25")
-   puts "********* Debugging message from before_action @teams:"
-   puts @teams.inspect
- end
+    @teams ||= NbaStatsService.playoff_teams(season: "2024-25")
+  end
 end

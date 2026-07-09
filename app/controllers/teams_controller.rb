@@ -4,8 +4,6 @@ class TeamsController < ApplicationController
 
 	def show
 		team_id = params[:id]
-		puts "debugging message teams#show team_id:" 
-		puts team_id
 
     # Team totals for grid
     @team_totals = NbaStatsService.team_totals(team_id: team_id, season: "2024-25")
@@ -16,7 +14,5 @@ class TeamsController < ApplicationController
 
     # Full roster (names + photos + jersey numbers)
     @roster = NbaStatsService.team_roster(team_id: team_id, season: "2024-25")
-		puts "********* Debugging message from teams#show @roster:"
-		puts @roster.inspect
 	end
 end

@@ -204,19 +204,12 @@ class NbaStatsService
     else
       Rails.logger.error "API error for player touches: #{response.code} - #{response.body}"
     end
-    puts "NBA API response for #{endpoint}:"
-    puts response
-    puts "url:"
-    puts url
-    puts "params:"
-    puts params.inspect
+
     JSON.parse(response.body)
   end
 
   def self.normalize_result(response)
-    puts "******** normalizing response: #{response.inspect}"
     result_set = response["resultSets"].first
-    puts "********* normalizing result_set: #{result_set.inspect}"
     headers = result_set["headers"]
     result_set["rowSet"].map { |row| headers.zip(row).to_h }
     # Rails.logger.debug "Keys in normalize_result: #{rows.first.keys.inspect}" if rows.any?
