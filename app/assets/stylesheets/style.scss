@@ -63,43 +63,15 @@ Nav Styles
 	width: 100%;
 }
 
-.page-id-header {
-	padding: 5px 20px;
-	background-color: #E39D44;
-  height:70px;
-  border-radius: 0px;	
-  margin-bottom: 0px;
-  border: none;
-}
-
 a.navbar-brand {
   text-transform: uppercase;
   font-size: 24px;
-}
-
-.dropdown-menu .dropdown-item p {
-  margin-bottom: 0px;
-  padding: 0.2rem 0rem;
 }
 
 .dropdown-menu a.dropdown-item:hover {
   background-color: #ececec;
   border: none;
 }
-
-.navbar-brand-custom h1, .footer h1 {
-  font-size: 30px;
-  font-weight: 700;
-  padding: 0px;
-  text-transform: lowercase;
-  line-height: 5px;
-  color: #333;
-}
-
-.navbar-right-custom {
-  padding-top: 5px;
-}
-
 
 
 .player-page-name {
@@ -374,30 +346,24 @@ text-transform: lowercase;
 	font-size: 20px;
 }
 
-.f-top {
-  background-color: orange;
-  height: 30px;
-  margin-top: 170px;
-}
-
 .footer {
   background-color: #eee;
-  padding: 3% 4% 30%;
-  border-top:10px solid #777;
+  padding: 4% 4% 10%;
+  border-top:30px solid orange;
+  margin-top: 170px;
   
 }
 
+.footer h2 {
+  text-transform: uppercase;
+}
 .footer p {
   color: #565454;
 }
 
-.footer-copy p {
-  font-size: 12px; 
+.footer-attribution {
+  font-size: 14px;
   margin-top: 30px;
-}
-
-.footer-right {
-  margin-top: 15px;
 }
 
 .alert-custom {

@@ -195,3 +195,13 @@
   border-radius: 9999px;
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
 }
+
+@media (max-width: 991px) {
+  .player-ranking-column {
+    justify-content: start !important;
+    margin-top: 2rem;
+  }
+  .player-ranking {
+    text-align: left;
+  }
+}

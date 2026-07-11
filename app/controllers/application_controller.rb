@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
   
   def set_playoff_teams
-    @teams ||= NbaStatsService.playoff_teams(season: "2024-25")
+    @teams ||= NbaStatsService.playoff_teams(season: "2025-26")
   end
 end

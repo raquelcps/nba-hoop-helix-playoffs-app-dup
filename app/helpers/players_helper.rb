@@ -19,7 +19,7 @@ module PlayersHelper
     number_with_precision(value, precision: precision)
   end
 
-  # Compute contributions for multiple stats (not mins since that needs special handling with multiplier; not passes since i haven't collected that data yet)
+  # Compute contributions for multiple stats (not passes since i haven't collected that data yet)
   def player_contribution_stats(player_data, team_totals, stats:, multiplier: nil)
     puts "######Debugging message in player_contribution_stats: player_data: #{player_data}, team_totals: #{team_totals}, stats: #{stats}, multiplier: #{multiplier}"
     stats.each_with_object({}) do |stat, hash|

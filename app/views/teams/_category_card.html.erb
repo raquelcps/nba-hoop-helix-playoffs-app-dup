@@ -31,11 +31,11 @@
           </td>
 
           <td class="player-value">
-            <%= value %>
+            <%= format_contribution_percentage(value, precision: 0) %>
           </td>
 
           <td class="player-percent">
-            <%= format_contribution_percentage(contribution) %>
+            <%= format_contribution_percentage(contribution) %>%
           </td>
         </tr>
 
