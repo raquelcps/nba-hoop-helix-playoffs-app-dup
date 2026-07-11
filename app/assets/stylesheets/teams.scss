@@ -2,8 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.intro {
+  margin-top: 60px;
+  margin-bottom: 80px;
+  color: #565454;
+}
+
 .team-index {
-	margin-top: 35px;
 	a {
 		text-decoration: none;
 	}
@@ -14,6 +19,12 @@
 
 .team-index img {
 	width: 150px;
+}
+
+.team-index-title {
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  color: #565454;
 }
 
 .team-unit {

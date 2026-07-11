@@ -14,7 +14,7 @@ class NbaStatsService
   # Public API methods
   # -------------------
 
-  def self.playoff_teams(season: "2024-25")
+  def self.playoff_teams(season: "2025-26")
     Rails.cache.fetch("nba/playoff_teams/#{season}", expires_in: 12.hours) do
       response = get_json("leaguedashteamstats", {
         Season: season,
@@ -32,6 +32,7 @@ class NbaStatsService
         PlusMinus: "N",
         Rank: "N",
       })
+      puts "Debugging message in playoff_teams: response: #{response}" # Debugging message
       normalize_result(response).map do |row|
         {
           team_id: row["TEAM_ID"],
@@ -44,7 +45,7 @@ class NbaStatsService
     end
   end
 
-  def self.team_totals(team_id:, season: "2024-25", poround: 0)
+  def self.team_totals(team_id:, season: "2025-26", poround: 0)
     Rails.cache.fetch("nba/team_totals/#{team_id}/#{season}/#{poround}", expires_in: 12.hours) do
       response = get_json("leaguedashteamstats", {
         Season: season,
@@ -99,7 +100,7 @@ class NbaStatsService
     end
   end
 
-  def self.team_players(team_id:, season: "2024-25", poround: 0)
+  def self.team_players(team_id:, season: "2025-26", poround: 0)
     Rails.cache.delete("nba/team_players/#{team_id}/#{season}/#{poround}") #temp delete cache for testing
     Rails.cache.fetch("nba/team_players/#{team_id}/#{season}/#{poround}", expires_in: 1.minute) do #was 12.hours
       response = get_json("leaguedashplayerstats", {
@@ -170,7 +171,7 @@ class NbaStatsService
     end
   end
 
-  def self.team_roster(team_id:, season: "2024-25")
+  def self.team_roster(team_id:, season: "2025-26")
     Rails.cache.delete("nba/team_roster/#{team_id}/#{season}") #temp delete cache for testing
     Rails.cache.fetch("nba/team_roster/#{team_id}/#{season}", expires_in: 1.minute) do #was 12.hours
       response = get_json("commonteamroster", {
@@ -193,25 +194,116 @@ class NbaStatsService
   end
 
   # -------------------
+  # Team Game Logs
+  # -------------------
+
+  def self.team_game_logs(team_id:, season: "2025-26", poround: 0)
+    Rails.cache.fetch(
+      "nba/team_game_logs/#{team_id}/#{season}/#{poround}",
+      expires_in: 12.hours
+    ) do
+
+      response = get_json("teamgamelogs", {
+        TeamID: team_id,
+        Season: season,
+        SeasonType: "Playoffs",
+        PORound: poround,
+        LeagueID: "00"
+      })
+
+      normalize_result(response)
+    end
+  end
+
+  def self.game_teams(game_id)
+    response = get_json("boxscoresummaryv2", {
+      GameID: game_id
+    })
+
+    result_sets = response["resultSets"]
+
+    game_summary =
+      result_sets.find { |set| set["name"] == "GameSummary" }
+
+    headers = game_summary["headers"]
+
+    row =
+      headers.zip(game_summary["rowSet"].first).to_h
+
+    {
+      home_team_id: row["HOME_TEAM_ID"],
+      visitor_team_id: row["VISITOR_TEAM_ID"]
+    }
+  end
+
+  def self.playoff_opponent(team_id:, season: "2025-26", poround:)
+    games =
+      team_game_logs(
+        team_id: team_id,
+        season: season,
+        poround: poround
+      )
+
+    return nil if games.empty?
+
+    game = games.first
+
+    teams =
+      game_teams(game["GAME_ID"])
+
+    opponent_id =
+      if teams[:home_team_id].to_s == team_id.to_s
+        teams[:visitor_team_id]
+      else
+        teams[:home_team_id]
+      end
+
+    opponent =
+      playoff_teams(season: season)
+        .find { |team| team[:team_id].to_s == opponent_id.to_s }
+
+    {
+      opponent_team_id: opponent_id,
+      opponent_team_name: opponent[:team_name],
+      opponent_logo_url: opponent[:logo_url]
+    }
+  end
+
+  # -------------------
   # Helpers
   # -------------------
 
   def self.get_json(endpoint, params = {})
     url = "#{BASE_URL}/#{endpoint}"
     response = HTTParty.get(url, query: params, headers: DEFAULT_HEADERS)
+    body = response.body.to_s
+
     if response.code == 200
       puts "Debugging message response code: #{response.code}"
     else
-      Rails.logger.error "API error for player touches: #{response.code} - #{response.body}"
+      Rails.logger.error "NBA API error for #{endpoint}: #{response.code} - #{body}"
     end
 
-    JSON.parse(response.body)
+    if body.strip.empty?
+      Rails.logger.error "NBA API returned an empty body for #{endpoint} (params: #{params.inspect})"
+      return { "resultSets" => [{ "headers" => [], "rowSet" => [] }] }
+    end
+
+    JSON.parse(body)
+  rescue JSON::ParserError => e
+    Rails.logger.error "NBA API JSON parse error for #{endpoint}: #{e.message}. Body starts with: #{body[0, 200].inspect}"
+    { "resultSets" => [{ "headers" => [], "rowSet" => [] }] }
   end
 
   def self.normalize_result(response)
-    result_set = response["resultSets"].first
+    result_set = response["resultSets"]&.first
+    return [] unless result_set
+
     headers = result_set["headers"]
-    result_set["rowSet"].map { |row| headers.zip(row).to_h }
+    row_set = result_set["rowSet"]
+    return [] unless headers && row_set
+
+    row_set.map { |row| headers.zip(row).to_h }
     # Rails.logger.debug "Keys in normalize_result: #{rows.first.keys.inspect}" if rows.any?
   end
 

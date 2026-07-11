@@ -3,7 +3,7 @@
 	<header class="full-header">
 		<div class="team-page-header">
 			<p class="team-page-header__season">
-				2024-25 PLAYOFFS
+				2025-26 PLAYOFFS
 			</p>
 			<h1 class="team-page-header__title">
 				<%= @team_totals["team_name"] %>
@@ -12,6 +12,59 @@
 			<p class="team-page-header__subtitle">
 				Team Profile
 			</p>
+
+			<div class="col-lg-3">
+
+					<!-- Round selector -->
+					<h6 class="text-uppercase text-muted mb-3">
+						Playoff Round
+					</h6>
+
+					<%= form_with url: team_path(@team_totals[:team_id]), method: :get, local: true do %>
+
+						<%= hidden_field_tag :team_id, @team_totals[:team_id] %>
+
+						<%= select_tag(
+							:round,
+							options_for_select(
+								@available_rounds.map { |r|
+
+									case r
+
+									when 0
+											["All Rounds",0]
+
+									when 1
+											["First Round",1]
+
+									when 2
+											["Semifinals",2]
+
+									when 3
+											["Conference Finals",3]
+
+									when 4
+											["Finals",4]
+
+									end
+
+								},
+							@selected_round
+						),
+						class: "form-select",
+						onchange: "this.form.submit();"
+						) %>
+
+					<% end %>
+			</div>
+
+			<div class="col-lg-3">
+				<% if @playoff_opponent.present? && @selected_round.positive? %>
+					<p class="player-page-opponent">
+						vs. <%= @playoff_opponent[:opponent_team_name] %>
+					</p>
+				<% end %>
+			</div>
 		</div>
 	</header>
 	<div class="row">
