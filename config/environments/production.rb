@@ -83,4 +83,7 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # For Render
+  config.assets.precompile += %w( application.css )
+
 end
