@@ -12,8 +12,8 @@ gem 'sassc-rails'
 gem 'sprockets-rails'
 # Use coffeescript for now but will migrate to js later
 gem 'coffee-script'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 4.2', '>= 4.2.1'
+# Use Terser as compressor for JavaScript assets
+gem 'terser'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
