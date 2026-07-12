@@ -20,7 +20,10 @@
 						Playoff Round
 					</h6>
 
-					<%= form_with url: team_path(@team_totals[:team_id]), method: :get, local: true do %>
+					<%= form_with url: team_path(@team_totals[:team_id]),
+						method: :get,
+						local: true,
+						html: { class: "playoff-round-form" } do %>
 
 						<%= hidden_field_tag :team_id, @team_totals[:team_id] %>
 

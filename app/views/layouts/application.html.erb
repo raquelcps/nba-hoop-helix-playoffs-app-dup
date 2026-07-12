@@ -11,11 +11,24 @@
 </head>
 <body>
 <!-- Animated preloader -->
-<div id="loading">
-    <img src="http://www.webdesign.org/img_articles/13053/loading-gif-animation.gif" alt="loading" />
-</div>
- <div id="message">   
-   <h1 class="alert alert-info">Data may take several seconds to load.<br/>Thanks for your patience.</h1>
+<div id="page-loader" class="page-loader">
+
+  <div class="page-loader__content">
+
+    <div class="page-loader__title">
+      Loading team data...
+    </div>
+
+    <div class="page-loader__dots">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
 </div>
 
 <header>
@@ -56,29 +69,5 @@
 </footer>
 
 
-<!-- JS for animated preloader -->
-<script>
-function hideLoading() {
-    // other code can be placed here 
-    $("#loading").hide();
-    $("#message").hide();
-    // other code can be placed here
-}
-
-function showLoading() {
-    // other code can be placed here 
-    $("#loading").show();
-    $("#message").show();
-    // other code can be placed here
-}
-
-function startLoadingAnimation() {
-  showLoading();
-  // simulate a task that can take 3 seconds
-  // afterwards show hide the loading GIF
-  setTimeout(hideLoading, 25000);
-  return false;
-}
-</script>
 </body>
 </html>
