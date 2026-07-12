@@ -10,7 +10,7 @@
       class="roster-player"
       data-player-id="<%= player[:player_id] %>">
       <% if @playoff_players.include?(player[:player_id].to_s) %>
-        <%= link_to player_path(player[:player_id], team_id: params[:id]), onclick: "startLoadingAnimation();" do %>
+        <%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
 
           <%= image_tag player[:photo_url],
             class: "roster-player__photo",

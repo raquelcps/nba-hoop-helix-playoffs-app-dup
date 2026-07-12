@@ -10,12 +10,46 @@ class NbaStatsService
     "Referer" => "https://www.nba.com/"
   }
 
+  TEAM_ABBREVIATIONS = {
+    "ATL" => 1610612737,
+    "BOS" => 1610612738,
+    "BKN" => 1610612751,
+    "CHA" => 1610612766,
+    "CHI" => 1610612741,
+    "CLE" => 1610612739,
+    "DAL" => 1610612742,
+    "DEN" => 1610612743,
+    "DET" => 1610612765,
+    "GSW" => 1610612744,
+    "HOU" => 1610612745,
+    "IND" => 1610612754,
+    "LAC" => 1610612746,
+    "LAL" => 1610612747,
+    "MEM" => 1610612763,
+    "MIA" => 1610612748,
+    "MIL" => 1610612749,
+    "MIN" => 1610612750,
+    "NOP" => 1610612740,
+    "NYK" => 1610612752,
+    "OKC" => 1610612760,
+    "ORL" => 1610612753,
+    "PHI" => 1610612755,
+    "PHX" => 1610612756,
+    "POR" => 1610612757,
+    "SAC" => 1610612758,
+    "SAS" => 1610612759,
+    "TOR" => 1610612761,
+    "UTA" => 1610612762,
+    "WAS" => 1610612764
+  }.freeze
+
   # -------------------
   # Public API methods
   # -------------------
 
   def self.playoff_teams(season: "2025-26")
-    Rails.cache.fetch("nba/playoff_teams/#{season}", expires_in: 12.hours) do
+    Rails.cache.delete("nba/playoff_teams/#{season}") #temp delete cache for testing
+    Rails.cache.fetch("nba/playoff_teams/#{season}", expires_in: 1.minute) do #was 12.hours
       response = get_json("leaguedashteamstats", {
         Season: season,
         SeasonType: "Playoffs",
@@ -215,27 +249,6 @@ class NbaStatsService
     end
   end
 
-  def self.game_teams(game_id)
-    response = get_json("boxscoresummaryv2", {
-      GameID: game_id
-    })
-
-    result_sets = response["resultSets"]
-
-    game_summary =
-      result_sets.find { |set| set["name"] == "GameSummary" }
-
-    headers = game_summary["headers"]
-
-    row =
-      headers.zip(game_summary["rowSet"].first).to_h
-
-    {
-      home_team_id: row["HOME_TEAM_ID"],
-      visitor_team_id: row["VISITOR_TEAM_ID"]
-    }
-  end
-
   def self.playoff_opponent(team_id:, season: "2025-26", poround:)
     games =
       team_game_logs(
@@ -247,23 +260,33 @@ class NbaStatsService
     return nil if games.empty?
 
     game = games.first
+    matchup = game["MATCHUP"]
 
-    teams =
-      game_teams(game["GAME_ID"])
+    return nil if matchup.blank?
 
-    opponent_id =
-      if teams[:home_team_id].to_s == team_id.to_s
-        teams[:visitor_team_id]
+    opponent_abbreviation =
+      if matchup.include?(" @ ")
+        visitor, home = matchup.split(" @ ")
+        visitor == game["TEAM_ABBREVIATION"] ? home : visitor
+      elsif matchup.include?(" vs. ")
+        home, visitor = matchup.split(" vs. ")
+        home == game["TEAM_ABBREVIATION"] ? visitor : home
       else
-        teams[:home_team_id]
+        return nil
       end
+
+    opponent_id = TEAM_ABBREVIATIONS[opponent_abbreviation]
+
+    return nil unless opponent_id
 
     opponent =
       playoff_teams(season: season)
-        .find { |team| team[:team_id].to_s == opponent_id.to_s }
+        .find { |team| team[:team_id] == opponent_id }
+
+    return nil unless opponent
 
     {
-      opponent_team_id: opponent_id,
+      opponent_team_id: opponent[:team_id],
       opponent_team_name: opponent[:team_name],
       opponent_logo_url: opponent[:logo_url]
     }

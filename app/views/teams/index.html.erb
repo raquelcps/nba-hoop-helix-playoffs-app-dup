@@ -12,7 +12,7 @@
 		<div class="row row-cols-4 g-4 text-center">
 			<% @teams.each do |team| %>
 				<div class="col">
-					<%= link_to team_path(team[:team_id]), onclick: "startLoadingAnimation();" do %>
+					<%= link_to team_path(team[:team_id]) do %>
 						<img src="<%= team[:logo_url] %>" alt="<%= team[:team_name] %> logo" class="img-fluid mb-2" style="max-height: 80px;">
 						<p class="mb-0 font-roboto"><%= team[:team_name] %></p>
 					<% end %>
