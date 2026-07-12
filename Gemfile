@@ -4,7 +4,6 @@ ruby '3.3.0'
 #Added by Author
 gem 'httparty', '~> 0.23.1'
 gem 'bootstrap', '~> 5.3.3' # Or the latest stable version
-gem 'pg', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.1'
