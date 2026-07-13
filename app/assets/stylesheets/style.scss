@@ -166,9 +166,6 @@ body p, body a, body li, body td, body th {
 /*
 Nav Styles
 */ 
-.full-header {
-	width: 100%;
-}
 
 a.navbar-brand {
   text-transform: uppercase;
@@ -251,6 +248,10 @@ a.navbar-brand {
 	padding: 3px 15px;
 }
 
+.card {
+  margin-top: 2.5rem;
+}
+
 .player-profile-card {
   border-bottom: 1px solid #e8ebee96;
 }
@@ -273,10 +274,48 @@ a.navbar-brand {
 }
 
 .playoff-round-selector {
+  margin-top: 2.5rem;
+
+  .selector-label {
+    font-size: 0.9rem;
+  }
+}
+
+.playoff-round-opponent {
+  padding-left: 1rem;
+}
+
+// Header styles for Teams show and Player show pages
+.team-page-header,
+.player-page-header {
+  margin-bottom: 2.5rem;
   margin-top: 2rem;
 }
 
+.team-page-header-season,
+.player-page-header-season {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #777;
+}
 
+.team-page-header-title,
+.player-page-header-title {
+  margin: 0.5rem 0 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.team-page-header-subtitle,
+.player-page-header-subtitle {
+  margin: 0.75rem 0 0;
+  font-size: 1rem;
+  color: #666;
+}
 
 
 .stat-main {

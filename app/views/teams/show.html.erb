@@ -1,75 +1,77 @@
 <!-- Main Pane -->
 <div class="main">
-	<header class="full-header">
-		<div class="team-page-header">
-			<p class="team-page-header__season">
-				2025-26 PLAYOFFS
-			</p>
-			<h1 class="team-page-header__title">
-				<%= @team_totals["team_name"] %>
-			</h1>
+	<header class="team-page-header">
+		<h5 class="team-page-header-season">
+			2025-26 NBA PLAYOFFS
+		</h5>
+		<h1 class="team-page-header-title">
+			<%= @team_totals["team_name"] %>
+		</h1>
 
-			<p class="team-page-header__subtitle">
-				Team Profile
-			</p>
+		<h6 class="team-page-header-subtitle">
+			Team Profile
+		</h6>
 
+		<div class="playoff-round-selector row mb-1">
 			<div class="col-lg-3">
 
-					<!-- Round selector -->
-					<h6 class="text-uppercase text-muted mb-3">
-						Playoff Round
-					</h6>
+				<!-- Round selector -->
+				<h5 class="selector-label text-uppercase text-muted mb-2">
+					Playoff Round
+				</h5>
 
-					<%= form_with url: team_path(@team_totals[:team_id]),
-						method: :get,
-						local: true,
-						html: { class: "playoff-round-form" } do %>
+				<%= form_with url: team_path(@team_totals[:team_id]),
+					method: :get,
+					local: true,
+					html: { class: "playoff-round-form" } do %>
 
-						<%= hidden_field_tag :team_id, @team_totals[:team_id] %>
+					<%= hidden_field_tag :team_id, @team_totals[:team_id] %>
 
-						<%= select_tag(
-							:round,
-							options_for_select(
-								@available_rounds.map { |r|
+					<%= select_tag(
+						:round,
+						options_for_select(
+							@available_rounds.map { |r|
 
-									case r
+								case r
 
-									when 0
-											["All Rounds",0]
+								when 0
+										["All Rounds",0]
 
-									when 1
-											["First Round",1]
+								when 1
+										["First Round",1]
 
-									when 2
-											["Semifinals",2]
+								when 2
+										["Semifinals",2]
 
-									when 3
-											["Conference Finals",3]
+								when 3
+										["Conference Finals",3]
 
-									when 4
-											["Finals",4]
+								when 4
+										["Finals",4]
 
-									end
+								end
 
-								},
-							@selected_round
-						),
-						class: "form-select",
-						onchange: "this.form.submit();"
-						) %>
+							},
+						@selected_round
+					),
+					class: "form-select",
+					onchange: "this.form.submit();"
+					) %>
 
-					<% end %>
-			</div>
-
-			<div class="col-lg-3">
-				<% if @playoff_opponent.present? && @selected_round.positive? %>
-					<p class="player-page-opponent">
-						vs. <%= @playoff_opponent[:opponent_team_name] %>
-					</p>
 				<% end %>
 			</div>
 		</div>
+
+		<div class="col-lg-3">
+			<% if @playoff_opponent.present? && @selected_round.positive? %>
+				<p class="playoff-round-opponent mt-3">
+					vs. <%= @playoff_opponent[:opponent_team_name] %>
+				</p>
+			<% end %>
+		</div>
+
 	</header>
+
 	<div class="row">
 
 		<div class="col-lg-9">
