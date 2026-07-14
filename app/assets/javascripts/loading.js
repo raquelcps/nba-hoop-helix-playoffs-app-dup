@@ -27,6 +27,16 @@
         showLoader();
       });
 
+      var select = form.querySelector("select");
+
+      if (select) {
+        select.addEventListener("change", function() {
+          setLoaderMessage("Loading it UPUP");
+          showLoader();
+          form.submit();
+        });
+      }
+
     });
   }
 
