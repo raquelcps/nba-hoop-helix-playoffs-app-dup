@@ -1,36 +1,95 @@
-= WIP Refactor and update one of the first apps I built 10 years ago
-Note: This readme is a living document that I will update as I make decisions and articulate my process.
+== Hoop Helix | {DEMO}[https://hoop-helix.onrender.com] 
 
-  
-  UPDATE JAN 2026: 
-  This project has been on hold over the past few months while I tend to life priorities (mostly good things).
-  I'll ease back into it as the Minnesota ice thaws out.
+Hoop Helix is a Ruby on Rails application for exploring basketball through interactive visualizations.
 
+Most basketball statistics answer questions like "Who scored the most points?" or "Who had the most assists?" Hoop Helix starts with a different question:
 
-== Background
-In the spring of 2015 I built the original version of Hoop Helix as a capstone project while I was a student at Actualize Code School (formerly known as Anyone Can Learn To Code) in Chicago.
+*How does an individual player contribute to the identity of a team?*
 
-Hoop Helix focused on basketball as a team sport. I designed the app to pull data from nba.com and display it in a way that highlights players' contributions to their teams and interactions with their teammates.
+The project explores basketball as a connected system rather than a collection of individual performances. Every team develops its own patterns of play, distribution of responsibility, and style. Those patterns—its "DNA"—are what inspired the name *Hoop Helix*.
 
-I think of the original code as the definition of brute forcing my way through a project. There is so much duplication and mess everywhere. It's in the controllers, in the templates, in the architecture of the project in general.
+Rather than trying to predict outcomes or build advanced statistical models, Hoop Helix focuses on helping people explore the relationships that already exist within the data.
 
-== Purpose
-Having stepped away from coding for a bit, I thought it would be a fun learning opportunity to try to get Hoop Helix up and running again. It's a way to refresh technical skills, to learn some new things, and also to apply the knowledge I've gained since I first wrote the app.
+== Why This Project Exists
 
-Since I am stepping back into the coding world I want to feel comfortable with writing code and all the things that entails – the IDE, the command line, the process of committing and pushing code, working with AI. I want to gain confidence in processes that I have historically felt less engaged with (like updating tools and libraries) or have little experience with by forcing myself to do those things.
+The original version of Hoop Helix was one of the first substantial projects I built while learning web development ten years ago.
 
-The goal for me is twofold: 
-1. Get the refactored app running and deployed
-2. Use the process of refactoring and deploying to regain confidence in my skills and decision making
+Like many first projects, it contained ideas I still love alongside implementation decisions that make me laugh today.
 
-Although I initially felt very intimidated when I started this project, it's proving to be a good reminder that I actually remember how to do these things, that I have years of professional experience. And if I don't know something, I have a good idea of how to search for an answer and figure it out. Do I know everything? No way, but that's not ever going to be true. And it's not the purpose of this exercise.
+Revisiting it has been an enjoyable reminder of how much I've grown as an engineer. Instead of starting from scratch, I chose to rebuild and refactor the application while preserving the original curiosity that inspired it.
 
-== Plans
-I think I'm going to use the Wiki section to articulate my plans more fully, but until then here's a list of major points of emphasis:
+Working through an older codebase has been valuable practice in recognizing opportunities for cleaner architecture, clearer abstractions, and more maintainable code. Along the way I've also been rediscovering ideas I had forgotten, keeping the ones that still feel interesting and replacing the ones that don't.
 
-* removing duplication in logic
-* removing duplication in templates
-* improving semantic HTML
-* improving CSS structure, naming and strategy
-* meeting WGAC 2.2 standards
-* adding tests
+== Features
+
+Current functionality includes:
+
+* Team and player pages built from NBA Stats API data
+* Playoff round exploration
+* Contextual player rankings within a team
+* Player contribution metrics expressed as percentages of team production
+* Visual contribution components designed to make statistical relationships easier to understand
+* Responsive layouts for desktop and mobile devices
+
+Rather than emphasizing individual box score totals, the interface focuses on helping users understand how responsibility is distributed across an entire team.
+
+== Architecture
+
+The application is built with Ruby on Rails and retrieves live data from the NBA Stats API.
+
+Rather than persisting large amounts of statistical data in a local database, Hoop Helix retrieves live data from the API while caching responses to improve performance and reduce unnecessary requests. I chose this approach because I wanted to better understand the API itself and explore how it might support future features.
+
+As the project has evolved, I've continued refactoring the original architecture to better separate responsibilities.
+
+Current architectural improvements include:
+
+* Service objects for external API communication and data normalization
+* Shared helper methods for reusable contribution calculations
+* Reusable view components for player and team statistics
+* Progressive reduction of duplicated business logic
+
+This work is ongoing. Planned improvements include:
+
+* Thorough automated test coverage
+* Continued architectural refactoring
+* SCSS cleanup and organization
+* Removal of obsolete ERB templates
+* Additional documentation throughout the codebase
+
+== Visualizing Team DNA
+
+One of the central ideas behind Hoop Helix is that basketball is easier to understand through relationships than isolated numbers.
+
+The application currently explores those relationships through visual components such as:
+
+* Team contribution distributions
+* Player contribution comparisons
+* Contextual team rankings
+* Playoff progression and opponent context
+
+Some visualizations are intentionally simple. Others will become more exploratory over time.
+
+The goal is not to overwhelm users with statistics or predict future performance. Instead, I want to create tools that make patterns easier to notice and invite people to ask new questions about how teams function.
+
+== Roadmap
+
+Hoop Helix is intentionally an evolving project rather than one with a fixed endpoint.
+
+Current areas of exploration include:
+
+* Expanded visualization techniques
+* Additional ways to compare player contributions
+* Stronger automated test coverage
+* Continued architectural refactoring
+* WNBA support alongside NBA data
+* Comparable contribution metrics across both leagues
+
+As the project grows, I may use GitHub Projects to organize ideas, prioritize improvements, and track future development.
+
+== Technology
+
+* Ruby on Rails
+* NBA Stats API
+* SCSS
+* HTML / ERB
+* JavaScript
