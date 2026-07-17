@@ -48,8 +48,7 @@ class NbaStatsService
   # -------------------
 
   def self.playoff_teams(season: "2025-26")
-    Rails.cache.delete("nba/playoff_teams/#{season}") #temp delete cache for testing
-    Rails.cache.fetch("nba/playoff_teams/#{season}", expires_in: 1.minute) do #was 12.hours
+    Rails.cache.fetch("nba/playoff_teams/#{season}", expires_in: 12.hours) do
       response = get_json("leaguedashteamstats", {
         Season: season,
         SeasonType: "Playoffs",
@@ -135,8 +134,7 @@ class NbaStatsService
   end
 
   def self.team_players(team_id:, season: "2025-26", poround: 0)
-    Rails.cache.delete("nba/team_players/#{team_id}/#{season}/#{poround}") #temp delete cache for testing
-    Rails.cache.fetch("nba/team_players/#{team_id}/#{season}/#{poround}", expires_in: 1.minute) do #was 12.hours
+    Rails.cache.fetch("nba/team_players/#{team_id}/#{season}/#{poround}", expires_in: 12.hours) do
       response = get_json("leaguedashplayerstats", {
         Season: season,
         SeasonType: "Playoffs",
@@ -206,8 +204,7 @@ class NbaStatsService
   end
 
   def self.team_roster(team_id:, season: "2025-26")
-    Rails.cache.delete("nba/team_roster/#{team_id}/#{season}") #temp delete cache for testing
-    Rails.cache.fetch("nba/team_roster/#{team_id}/#{season}", expires_in: 1.minute) do #was 12.hours
+    Rails.cache.fetch("nba/team_roster/#{team_id}/#{season}", expires_in: 12.hours) do
       response = get_json("commonteamroster", {
         Season: season,
         TeamID: team_id
