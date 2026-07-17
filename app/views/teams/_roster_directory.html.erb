@@ -1,28 +1,29 @@
 <div class="team-roster">
 
-  <h3 class="team-roster__title">
+  <h3 class="team-roster-title">
     Roster
   </h3>
 
   <% @roster.sort_by { |player| player_last_name(player) }.each do |player| %>
 
-    <div 
-      class="roster-player font-roboto"
-      data-player-id="<%= player[:player_id] %>">
+    <div>
       <% if @playoff_players.include?(player[:player_id].to_s) %>
+        <div class="roster-player font-roboto" data-player-id="<%= player[:player_id] %>">
         <%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
 
           <%= image_tag player[:photo_url],
-            class: "roster-player__photo",
+            class: "roster-player-photo",
             alt: player[:player_name] %>
 
-          <div class="roster-player__content">
-            <div class="roster-player__name">
+          <div class="roster-player-content">
+            <div class="roster-player-name">
+              <p>
               <%= player[:player_name] %>
-              <i class="fa fa-external-link"></i>
+              </p>
+              <span><i class="fa fa-external-link"></i></span>
             </div>
 
-            <div class="roster-player__meta">
+            <div class="roster-player-meta">
               #<%= player[:jersey] %>
               &bull;
               <%= player[:position] %>
@@ -30,15 +31,24 @@
               <%= player[:exp] %> yrs
             </div>
           </div>
+        </div>
         <% end %>
       <% else %>
+      <div class="roster-player roster-player-inactive font-roboto">
         <%= image_tag player[:photo_url],
-          class: "roster-player__photo",
+          class: "roster-player-photo roster-player-inactive",
           alt: player[:player_name] %>
-        <div class="roster-player__content">
-          <div class="roster-player__name">
-            <%= player[:player_name] %> (no playoff stats)
+
+        <div class="roster-player-content roster-player-inactive">
+          <div class="roster-player-name roster-player-inactive">
+            <p>
+            <%= player[:player_name] %>
+            </p>
           </div>
+          <div class="roster-player-meta roster-player-inactive">
+            No playoff stats
+            </div>
+        </div>
         </div>
       <% end %>
 

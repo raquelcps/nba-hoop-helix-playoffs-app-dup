@@ -1,10 +1,10 @@
 <div class="category-card">
-  <div class="category-card__header">
+  <div class="category-card-header">
     <h5><%= title %></h5>
     <span class="team-total">Team: <%= team_total %></span>
   </div>
 
-  <table class="category-card__table">
+  <table class="category-card-table">
     <tbody>
       <% players
           .sort_by { |player| -(player[stat] || 0) }
@@ -45,7 +45,7 @@
 
   <%# Expand button for full roster contributions %>
   <button
-    class="category-card__expand btn btn-link collapsed"
+    class="category-card-expand btn btn-link collapsed"
     type="button"
     data-bs-toggle="collapse"
     data-bs-target="#players-<%= stat %>"
@@ -63,7 +63,7 @@
     class="collapse"
     id="players-<%= stat %>">
 
-    <table class="category-card__table">
+    <table class="category-card-table">
 
       <tbody>
 

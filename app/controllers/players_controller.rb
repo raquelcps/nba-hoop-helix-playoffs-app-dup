@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
 	include PlayersHelper # to access helper methods, but this is not good practice
 
   def index
-	end
+  end
 
   def show
     player_id = params[:id]
@@ -25,7 +25,7 @@ class PlayersController < ApplicationController
     @player = players_in_round.find { |p| p[:player_id].to_s == player_id.to_s }
 
     # Collect available rounds (only include if the player actually has stats in that round)
-    @available_rounds = Rails.cache.fetch("nba/player_rounds/#{team_id}/#{player_id}", expires_in: 12.hours do
+    @available_rounds = Rails.cache.fetch("nba/player_rounds/#{team_id}/#{player_id}", expires_in: 12.hours) do
       [0, 1, 2, 3, 4].select do |round|
         stats = NbaStatsService.team_players(
           team_id: team_id,
