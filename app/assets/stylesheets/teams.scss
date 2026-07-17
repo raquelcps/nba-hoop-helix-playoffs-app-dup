@@ -311,6 +311,9 @@ top: 3px;
   text-decoration: none;
 	border-radius: 6px;
   transition: background-color .15s ease;
+    .roster-player__name {
+      font-size: 1rem;
+    }
 }
 
 //Highlight player in category card

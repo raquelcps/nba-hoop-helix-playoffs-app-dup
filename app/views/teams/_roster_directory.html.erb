@@ -7,7 +7,7 @@
   <% @roster.sort_by { |player| player_last_name(player) }.each do |player| %>
 
     <div 
-      class="roster-player"
+      class="roster-player font-roboto"
       data-player-id="<%= player[:player_id] %>">
       <% if @playoff_players.include?(player[:player_id].to_s) %>
         <%= link_to player_path(player[:player_id], team_id: params[:id]) do %>

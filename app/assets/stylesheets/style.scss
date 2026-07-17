@@ -494,7 +494,7 @@ text-transform: lowercase;
 
 .footer {
   background-color: #eee;
-  padding: 4% 4% 10%;
+  padding: 5% 4% 5%;
   border-top:30px solid orange;
   margin-top: 170px;
   
@@ -505,6 +505,10 @@ text-transform: lowercase;
 }
 .footer p {
   color: #565454;
+}
+
+.footer .fa {
+  font-size: 25px;
 }
 
 .footer-attribution {
