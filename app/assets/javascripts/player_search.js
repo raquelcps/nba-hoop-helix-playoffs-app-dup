@@ -7,7 +7,7 @@ document.addEventListener("turbolinks:load", () => {
   const filterRoster = () => {
     const query = searchInput.value.trim().toLowerCase();
 
-    rosterPlayers.forEach(player => {
+    rosterPlayers.forEach(function(player) {
       const name = player.dataset.playerName || "";
       player.style.display = name.includes(query) ? "" : "none";
     });
