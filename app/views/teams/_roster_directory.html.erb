@@ -4,11 +4,21 @@
     Roster
   </h3>
 
+  <input
+    type="search"
+    id="roster-search"
+    class="team-roster-search"
+    placeholder="Find a player...">
+
   <% @roster.sort_by { |player| player_last_name(player) }.each do |player| %>
 
-    <div>
-      <% if @playoff_players.include?(player[:player_id].to_s) %>
-        <div class="roster-player font-roboto" data-player-id="<%= player[:player_id] %>">
+    <% if @playoff_players.include?(player[:player_id].to_s) %>
+
+      <div
+        class="roster-player font-roboto"
+        data-player-id="<%= player[:player_id] %>"
+        data-player-name="<%= player[:player_name].downcase %>">
+
         <%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
 
           <%= image_tag player[:photo_url],
@@ -31,10 +41,17 @@
               <%= player[:exp] %> yrs
             </div>
           </div>
-        </div>
+        
         <% end %>
-      <% else %>
-      <div class="roster-player roster-player-inactive font-roboto">
+
+      </div>
+
+    <% else %>
+
+      <div>
+        class="roster-player roster-player-inactive font-roboto"
+        data-player-name="<%= player[:player_name].downcase %>">
+
         <%= image_tag player[:photo_url],
           class: "roster-player-photo roster-player-inactive",
           alt: player[:player_name] %>
@@ -45,14 +62,14 @@
             <%= player[:player_name] %>
             </p>
           </div>
+
           <div class="roster-player-meta roster-player-inactive">
             No playoff stats
-            </div>
+          </div>
         </div>
-        </div>
-      <% end %>
+      </div>
 
-    </div>
+    <% end %>
 
   <% end %>
 

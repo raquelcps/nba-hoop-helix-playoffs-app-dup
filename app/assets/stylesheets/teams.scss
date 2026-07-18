@@ -145,7 +145,7 @@ top: 3px;
 	padding: 0px;
 }
 
-// New component
+// Category cards
 .category-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -256,9 +256,8 @@ top: 3px;
 // Team roster directory
 .team-roster {
   padding-left: 1rem;
-
   position: sticky;
-  top: 1.5rem;
+  top: 10.5rem;
   align-self: flex-start;
 }
 
@@ -365,4 +364,20 @@ top: 3px;
   background: #e8f1ff;
   border-radius: 4px;
   transition: background-color .2s ease;
+}
+
+// Search input for roster directory
+.team-roster-search {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: .45rem .75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: .9rem;
+}
+
+.team-roster-search:focus {
+  outline: none;
+  border-color: #9ab6e8;
+  box-shadow: 0 0 0 3px rgba(154, 182, 232, .15);
 }
