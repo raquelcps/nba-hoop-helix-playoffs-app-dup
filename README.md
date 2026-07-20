@@ -1,16 +1,22 @@
-== Hoop Helix | {DEMO}[https://hoop-helix.onrender.com] 
+# Hoop Helix | [DEMO](https://onrender.com)
 
 Hoop Helix is a Ruby on Rails application for exploring basketball through interactive visualizations.
 
 Most basketball statistics answer questions like "Who scored the most points?" or "Who had the most assists?" Hoop Helix starts with a different question:
 
 *How does an individual player contribute to the identity of a team?*
+<p align="center">
+  <img src="README_images/hoop-helix-team-profile.gif" alt="Team Roster Search and Hover Stats Highlight" width="800">
+  <br>
+  <em>Figure 1: Hovering over any player dynamically highlights their individual contributions across all team statistics.</em>
+</p>
+
 
 The project explores basketball as a connected system rather than a collection of individual performances. Every team develops its own patterns of play, distribution of responsibility, and style. Those patterns—its "DNA"—are what inspired the name *Hoop Helix*.
 
 Rather than trying to predict outcomes or build advanced statistical models, Hoop Helix focuses on helping people explore the relationships that already exist within the data.
 
-== Why This Project Exists
+## Why This Project Exists
 
 The original version of Hoop Helix was one of the first substantial projects I built while learning web development ten years ago.
 
@@ -20,7 +26,7 @@ Revisiting it has been an enjoyable reminder of how much I've grown as an engine
 
 Working through an older codebase has been valuable practice in recognizing opportunities for cleaner architecture, clearer abstractions, and more maintainable code. Along the way I've also been rediscovering ideas I had forgotten, keeping the ones that still feel interesting and replacing the ones that don't.
 
-== Features
+## Features
 
 Current functionality includes:
 
@@ -33,7 +39,13 @@ Current functionality includes:
 
 Rather than emphasizing individual box score totals, the interface focuses on helping users understand how responsibility is distributed across an entire team.
 
-== Architecture
+<p align="center">
+  <img src="README_images/hoop-helix-player-profile.gif" alt="Player Profile Statistics and Ranks" width="800">
+  <br>
+  <em>Figure 2: Comprehensive Player Profile displaying contributions and team rankings.</em>
+</p>
+
+## Architecture
 
 The application is built with Ruby on Rails and retrieves live data from the NBA Stats API.
 
@@ -56,7 +68,7 @@ This work is ongoing. Planned improvements include:
 * Removal of obsolete ERB templates
 * Additional documentation throughout the codebase
 
-== Visualizing Team DNA
+## Visualizing Team DNA
 
 One of the central ideas behind Hoop Helix is that basketball is easier to understand through relationships than isolated numbers.
 
@@ -71,7 +83,7 @@ Some visualizations are intentionally simple. Others will become more explorator
 
 The goal is not to overwhelm users with statistics or predict future performance. Instead, I want to create tools that make patterns easier to notice and invite people to ask new questions about how teams function.
 
-== Roadmap
+## Roadmap
 
 Hoop Helix is intentionally an evolving project rather than one with a fixed endpoint.
 
@@ -86,7 +98,7 @@ Current areas of exploration include:
 
 As the project grows, I may use GitHub Projects to organize ideas, prioritize improvements, and track future development.
 
-== Technology
+## Technology
 
 * Ruby on Rails
 * NBA Stats API
