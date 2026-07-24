@@ -1,17 +1,17 @@
 <!-- Main Pane -->
 <div class="main">
-	<header class="intro row col-md-8 offset-md-2">
+	<header class="intro mx-auto">
 			<h6 class="font-roboto">
 			Welcome to Hoop Helix, a data-driven platform that provides a unique perspective on basketball, focusing on team dynamics and player contributions. The current scope of the project is the 2025-26 NBA playoffs. 
 			</h6>
 	</header>
 	<section class="col-md-12 team-index">
 		<h4 class="team-index-title text-center">Team Index</h4>
-		<div class="row row-cols-2 row-cols-lg-4 g-5 text-center">
+		<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-4 team-grid">
 			<% @teams.each do |team| %>
 				<div class="col">
 					<%= link_to team_path(team[:team_id]) do %>
-						<img src="<%= team[:logo_url] %>" alt="<%= team[:team_name] %> logo" class="img-fluid mb-2">
+						<img src="<%= team[:logo_url] %>" alt="<%= team[:team_name] %> logo">
 						<p class="mb-2 font-roboto"><%= team[:team_name] %></p>
 					<% end %>
 				</div>
