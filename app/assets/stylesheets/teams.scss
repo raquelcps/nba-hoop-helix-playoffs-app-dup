@@ -573,3 +573,35 @@ top: 3px;
   color: inherit;
   text-decoration: none;
 }
+
+// Mobile player selector for roster directory
+.mobile-player-selector {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: .75rem 0;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.selected-player-name {
+  font-size: .9rem;
+}
+
+.selected-player-pin {
+  margin-left: auto;
+  margin-right: .5rem;
+  color: #5f9f72;
+}
+
+.mobile-player-selector .expand-icon {
+  transition: transform .25s ease;
+}
+
+.mobile-player-selector[aria-expanded="true"] .expand-icon {
+  transform: rotate(180deg);
+}

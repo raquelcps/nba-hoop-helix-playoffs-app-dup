@@ -8,13 +8,57 @@ function initializePlayerSelection() {
 
   if (!rosterPlayers.length) return;
 
+  const selectedPlayerName = document.querySelector(".selected-player-name");
+  const selectedPlayerPin = document.querySelector(".selected-player-pin");
+  const rosterCollapse = document.getElementById("teamRosterCollapse");
 
   const selection = {
     hoveredPlayerId: null,
     pinnedPlayerId: null
   };
 
+  const updateMobilePlayerSelector = () => {
+    if (!selectedPlayerName || !selectedPlayerPin) return;
 
+    if (!selection.pinnedPlayerId) {
+      selectedPlayerName.textContent = "Select Player";
+      selectedPlayerPin.classList.add("d-none");
+      return;
+    }
+
+    const selectedPlayer = document.querySelector(
+      `.roster-player[data-player-id="${selection.pinnedPlayerId}"]`
+    );
+
+    if (!selectedPlayer) return;
+
+    const playerName =
+      selectedPlayer.dataset.playerName;
+
+    selectedPlayerName.textContent =
+      selectedPlayer.querySelector(".roster-player-name p").textContent;
+
+    selectedPlayerPin.classList.remove("d-none");
+  };
+
+  const collapseMobileRoster = () => {
+    console.log("Collapsing mobile roster...");
+    if (!rosterCollapse) return;
+
+    const mobile = window.matchMedia("(max-width: 991.98px)").matches;
+
+    if (!mobile) return;
+
+    const collapse = bootstrap.Collapse.getOrCreateInstance(
+      rosterCollapse,
+      {
+        toggle: false
+      }
+    );
+
+    collapse.hide();
+  };
+  
   const renderSelection = () => {
     const activePlayerId =
       selection.hoveredPlayerId || selection.pinnedPlayerId;
@@ -46,6 +90,7 @@ function initializePlayerSelection() {
 
     if (!activePlayerId) return;
 
+    updateMobilePlayerSelector();
 
     // Highlight active player's rows
     document
@@ -84,6 +129,8 @@ function initializePlayerSelection() {
     const pinButton =
       rosterPlayer.querySelector(".roster-player-pin");
 
+    const playerInfo =
+      rosterPlayer.querySelector(".roster-player-info");
 
     if (!actions || !pinButton) return;
 
@@ -107,7 +154,7 @@ function initializePlayerSelection() {
 
       selection.hoveredPlayerId = null;
       renderSelection();
-  });
+    });
 
 
     //
@@ -126,6 +173,31 @@ function initializePlayerSelection() {
 
       renderSelection();
     });
+
+    //
+    // Mobile selection
+    //
+    if (playerInfo) {
+      playerInfo.addEventListener("click", () => {
+
+        const mobile = window.matchMedia("(max-width: 991.98px)").matches;
+
+        if (!mobile) return;
+
+
+        if (selection.pinnedPlayerId === playerId) {
+          selection.pinnedPlayerId = null;
+        } else {
+          selection.pinnedPlayerId = playerId;
+        }
+
+
+        renderSelection();
+
+        collapseMobileRoster();
+
+      });
+    }
 
   });
 
