@@ -1,76 +1,118 @@
 <div class="team-roster">
 
-  <h3 class="team-roster-title">
+  <button
+    class="team-roster-toggle btn btn-link d-lg-none"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#teamRosterCollapse"
+    aria-expanded="false"
+    aria-controls="teamRosterCollapse">
+
+    <span class="team-roster-title">
+      Roster
+    </span>
+
+    <span class="expand-icon">
+      ▼
+    </span>
+
+  </button>
+
+  <h3 class="team-roster-title d-none d-lg-block">
     Roster
   </h3>
 
-  <input
-    type="search"
-    id="roster-search"
-    class="team-roster-search"
-    placeholder="Find a player...">
+  <div
+    class="collapse d-lg-block"
+    id="teamRosterCollapse">
 
-  <% @roster.sort_by { |player| player_last_name(player) }.each do |player| %>
+    <input
+      type="search"
+      id="roster-search"
+      class="team-roster-search"
+      placeholder="Find a player...">
 
-    <% if @playoff_players.include?(player[:player_id].to_s) %>
+    <% @roster.sort_by { |player| player_last_name(player) }.each do |player| %>
 
-      <div
-        class="roster-player font-roboto"
-        data-player-id="<%= player[:player_id] %>"
-        data-player-name="<%= player[:player_name].downcase %>">
+      <% if @playoff_players.include?(player[:player_id].to_s) %>
 
-        <%= link_to player_path(player[:player_id], team_id: params[:id]) do %>
+        <div
+          class="roster-player font-roboto"
+          data-player-id="<%= player[:player_id] %>"
+          data-player-name="<%= player[:player_name].downcase %>">
+
+          <div class="roster-player-info">
+
+            <%= image_tag player[:photo_url],
+              class: "roster-player-photo",
+              alt: player[:player_name] %>
+
+            <div class="roster-player-details">
+              <div class="roster-player-name">
+                <p><%= player[:player_name] %></p>
+              </div>
+
+              <div class="roster-player-meta">
+                #<%= player[:jersey] %>
+                &bull;
+                <%= player[:position] %>
+                &bull;
+                <%= player[:exp] %> yrs
+              </div>
+            </div>
+
+          </div>
+
+          <div class="roster-player-actions">
+            <button
+              type="button"
+              class="roster-player-pin"
+              aria-label="Pin player highlights"
+              data-tooltip="Pin highlights">
+
+              <i class="fa fa-thumb-tack"></i>
+
+            </button>
+
+            <%= link_to player_path(player[:player_id],
+              team_id: params[:id]),
+              class: "roster-player-profile",
+              aria: {label: "View player profile"},
+              data: {tooltip: "Player profile"} do %>
+
+              <i class="fa fa-external-link"></i>
+
+            <% end %>
+
+          </div>
+
+        </div>
+
+      <% else %>
+
+        <div
+          class="roster-player roster-player-inactive font-roboto"
+          data-player-name="<%= player[:player_name].downcase %>">
 
           <%= image_tag player[:photo_url],
-            class: "roster-player-photo",
+            class: "roster-player-photo roster-player-inactive",
             alt: player[:player_name] %>
 
-          <div class="roster-player-content">
-            <div class="roster-player-name">
+          <div class="roster-player-details roster-player-inactive">
+            <div class="roster-player-name roster-player-inactive">
               <p>
               <%= player[:player_name] %>
               </p>
-              <span><i class="fa fa-external-link"></i></span>
             </div>
 
-            <div class="roster-player-meta">
-              #<%= player[:jersey] %>
-              &bull;
-              <%= player[:position] %>
-              &bull;
-              <%= player[:exp] %> yrs
+            <div class="roster-player-meta roster-player-inactive">
+              No playoff stats
             </div>
-          </div>
-        
-        <% end %>
-
-      </div>
-
-    <% else %>
-
-      <div
-        class="roster-player roster-player-inactive font-roboto"
-        data-player-name="<%= player[:player_name].downcase %>">
-
-        <%= image_tag player[:photo_url],
-          class: "roster-player-photo roster-player-inactive",
-          alt: player[:player_name] %>
-
-        <div class="roster-player-content roster-player-inactive">
-          <div class="roster-player-name roster-player-inactive">
-            <p>
-            <%= player[:player_name] %>
-            </p>
-          </div>
-
-          <div class="roster-player-meta roster-player-inactive">
-            No playoff stats
           </div>
         </div>
-      </div>
+
+      <% end %>
 
     <% end %>
-
-  <% end %>
-
+  </div>
 </div>

@@ -8,7 +8,6 @@
     <tbody>
       <% players
           .sort_by { |player| -(player[stat] || 0) }
-          .take(5)
           .each_with_index do |player, index| %>
 
         <% value = player[stat] || 0 %>
@@ -21,7 +20,8 @@
         %>
 
         <tr data-player-id="<%= player[:player_id] %>"
-            class="category-card__row">
+            data-rank="<%= index + 1 %>"
+            class="category-card-row">
           <td class="player-rank">
             <%= index + 1 %>
           </td>
@@ -43,85 +43,16 @@
     </tbody>
   </table>
 
-  <%# Expand button for full roster contributions %>
   <button
-    class="category-card-expand btn btn-link collapsed"
     type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#players-<%= stat %>"
-    aria-expanded="false"
-    aria-controls="players-<%= stat %>">
-
-    <span class="expand-text">Full roster contributions</span>
-
+    class="category-card-expand btn btn-link"
+    aria-expanded="false">
+    <span class="expand-text">
+      Full Roster Contributions
+    </span>
     <span class="expand-icon">
       ▼
     </span>
   </button>
-
-  <div
-    class="collapse"
-    id="players-<%= stat %>">
-
-    <table class="category-card-table">
-
-      <tbody>
-
-        <% players
-            .sort_by { |player| -(player[stat] || 0) }
-            .drop(5)
-            .each_with_index do |player, index| %>
-
-          <% value = player[stat] || 0 %>
-          <% contribution =
-              player_contribution(
-                value,
-                team_total,
-                multiplier: (stat == :min ? 5 : 1)
-              )
-          %>
-
-          <tr data-player-id="<%= player[:player_id] %>">
-
-            <td class="player-rank">
-              <%= index + 6 %>
-            </td>
-
-            <td class="player-name">
-
-              <div class="player-info">
-
-                <span class="player-label">
-                  <%= player[:player_name] %>
-                </span>
-
-                <div class="contribution-bar">
-                  <div
-                    class="contribution-bar__fill"
-                    style="width:<%= format_contribution_percentage(contribution) %>%">
-                  </div>
-                </div>
-
-              </div>
-
-            </td>
-
-            <td class="player-value">
-              <%= value %>
-            </td>
-
-            <td class="player-percent">
-              <%= format_contribution_percentage(contribution) %>
-            </td>
-
-          </tr>
-
-        <% end %>
-
-      </tbody>
-
-    </table>
-
-  </div>
 
 </div>

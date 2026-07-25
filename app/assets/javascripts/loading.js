@@ -23,7 +23,7 @@
     console.log("Binding playoff round forms...");
     document.querySelectorAll(".playoff-round-form").forEach(function(form) {
       form.addEventListener("submit", function() {
-        setLoaderMessage("Loading it UPUP");
+        setLoaderMessage("Loading round data...");
         showLoader();
       });
 
@@ -31,7 +31,7 @@
 
       if (select) {
         select.addEventListener("change", function() {
-          setLoaderMessage("Loading it UPUP");
+          setLoaderMessage("Loading round data...");
           showLoader();
           form.submit();
         });

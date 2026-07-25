@@ -251,7 +251,7 @@ top: 3px;
   border-radius: 8px;
   padding: 1rem;
   background: white;
-	min-height: 270px;
+	min-height: 210px;
 	margin-bottom: 1rem;
 }
 
@@ -315,6 +315,10 @@ top: 3px;
 	border-top: 1px solid #eee;
   margin-top: 1rem;
   padding-top: .75rem;
+
+  transition:
+    color .2s ease,
+    background-color .2s ease;
 }
 
 .expand-text {
@@ -330,7 +334,7 @@ top: 3px;
   transition: transform .25s ease;
 }
 
-.category-card-expand:not(.collapsed) .expand-icon {
+.category-card-expand[aria-expanded="true"] .expand-icon {
   transform: rotate(180deg);
 }
 // 
@@ -347,7 +351,7 @@ top: 3px;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .category-grid {
     grid-template-columns: 1fr;
   }
@@ -370,24 +374,38 @@ top: 3px;
   color: #666;
 }
 
+// Roster list
 .roster-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   border-radius: 6px;
   border-top: 1px solid #f8f8f8;
   border-bottom: 1px solid #f8f8f8;
-  transition: background-color .2s ease;
   padding: .5rem .25rem;
+
+  transition: background-color .2s ease;
 }
 
-.roster-player > a {
+.roster-player-info {
   display: flex;
   align-items: center;
   gap: .75rem;
-  color: inherit;
-  text-decoration: none;
+
+  flex: 1;
+  min-width: 0;
 }
 
-.roster-player:hover {
-  background: #f7f9fc;
+.roster-player-info:focus-visible {
+  outline: 2px solid #9ab6e8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.roster-player-details {
+  min-width: 0;
+  flex: 1;
 }
 
 .roster-player-photo {
@@ -396,13 +414,6 @@ top: 3px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-
-  transition: transform .2s ease;
-}
-
-.roster-player-content {
-  min-width: 0;
-  flex: 1;
 }
 
 .roster-player-name {
@@ -418,29 +429,97 @@ top: 3px;
   margin: 0;
 }
 
-.roster-player-name span {
-  margin-left: .3rem;
-  color: #999;
-  transition: color .2s ease;
-}
-
 .roster-player-meta {
   margin-top: .15rem;
   font-size: .78rem;
   color: #777;
 }
 
-.roster-player:hover .roster-player-photo {
-  transform: scale(1.08);
+.roster-player-actions {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
 }
 
-.roster-player:hover .roster-player-name p {
-  text-decoration: underline;
+.roster-player-pin,
+.roster-player-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2rem;
+  height: 2rem;
+
+  border: none;
+  background: transparent;
+
+  color: #999;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color .2s ease,
+    opacity .2s ease;
 }
 
-.roster-player:hover .roster-player-name span {
-  color: #333;
+.roster-player:hover .roster-player-pin,
+.roster-player:hover .roster-player-profile {
+  color: #444;
 }
+
+.roster-player-pin,
+.roster-player-profile {
+  opacity: .45;
+  position: relative;
+}
+
+.roster-player-pin:hover,
+.roster-player-profile:hover {
+  opacity: 1;
+}
+
+.roster-player-pin.is-pinned,
+.roster-player:hover .roster-player-pin.is-pinned {
+  color: #5f9f72;
+  opacity: 1;
+}
+
+.roster-player:hover,
+.roster-player.is-pinned{
+  background: #f7f9fc;
+}
+
+// Tooltip for pin and profile buttons
+.roster-player-pin::after,
+.roster-player-profile::after {
+  content: attr(data-tooltip);
+
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: .25rem .5rem;
+  border-radius: 4px;
+
+  background: #333;
+  color: white;
+
+  font-size: .75rem;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .15s ease;
+}
+
+.roster-player-pin:hover::after,
+.roster-player-profile:hover::after {
+  opacity: 1;
+}
+
 
 .roster-player.roster-player-inactive {
   display: flex;
@@ -480,4 +559,17 @@ top: 3px;
   outline: none;
   border-color: #9ab6e8;
   box-shadow: 0 0 0 3px rgba(154, 182, 232, .15);
+}
+
+.team-roster-toggle {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: .75rem 0;
+
+  color: inherit;
+  text-decoration: none;
 }
