@@ -12,6 +12,10 @@ function initializePlayerSelection() {
   const selectedPlayerPin = document.querySelector(".selected-player-pin");
   const rosterCollapse = document.getElementById("teamRosterCollapse");
 
+  const clearSelectionButton =
+    document.querySelector("[data-clear-player-selection]");
+  console.log("Clear selection button:", clearSelectionButton);
+
   const selection = {
     hoveredPlayerId: null,
     pinnedPlayerId: null
@@ -23,6 +27,11 @@ function initializePlayerSelection() {
     if (!selection.pinnedPlayerId) {
       selectedPlayerName.textContent = "Select Player";
       selectedPlayerPin.classList.add("d-none");
+
+      if (clearSelectionButton) {
+        clearSelectionButton.classList.add("d-none");
+      }
+
       return;
     }
 
@@ -39,6 +48,10 @@ function initializePlayerSelection() {
       selectedPlayer.querySelector(".roster-player-name p").textContent;
 
     selectedPlayerPin.classList.remove("d-none");
+
+    if (clearSelectionButton) {
+      clearSelectionButton.classList.remove("d-none");
+    }
   };
 
   const collapseMobileRoster = () => {
@@ -87,10 +100,10 @@ function initializePlayerSelection() {
         button.setAttribute("aria-pressed", "false");
       });
 
+    updateMobilePlayerSelector();
 
     if (!activePlayerId) return;
 
-    updateMobilePlayerSelector();
 
     // Highlight active player's rows
     document
@@ -134,7 +147,6 @@ function initializePlayerSelection() {
 
     if (!actions || !pinButton) return;
 
-
     const playerId = rosterPlayer.dataset.playerId;
 
 
@@ -147,7 +159,6 @@ function initializePlayerSelection() {
       selection.hoveredPlayerId = playerId;
       renderSelection();
     });
-
 
     rosterPlayer.addEventListener("mouseleave", (event) => {
       if (actions.contains(event.relatedTarget)) return;
@@ -163,13 +174,11 @@ function initializePlayerSelection() {
     pinButton.addEventListener("click", (event) => {
       event.stopPropagation();
 
-
       if (selection.pinnedPlayerId === playerId) {
         selection.pinnedPlayerId = null;
       } else {
         selection.pinnedPlayerId = playerId;
       }
-
 
       renderSelection();
     });
@@ -183,14 +192,8 @@ function initializePlayerSelection() {
         const mobile = window.matchMedia("(max-width: 991.98px)").matches;
 
         if (!mobile) return;
-
-
-        if (selection.pinnedPlayerId === playerId) {
-          selection.pinnedPlayerId = null;
-        } else {
-          selection.pinnedPlayerId = playerId;
-        }
-
+       
+        selection.pinnedPlayerId = playerId;
 
         renderSelection();
 
@@ -200,5 +203,18 @@ function initializePlayerSelection() {
     }
 
   });
+
+
+  if (clearSelectionButton) {
+    console.log("Clear selection button found:", clearSelectionButton);
+    clearSelectionButton.addEventListener("click", () => {
+      selection.pinnedPlayerId = null;
+
+      renderSelection();
+      collapseMobileRoster();
+
+    });
+
+  }
 
 }
