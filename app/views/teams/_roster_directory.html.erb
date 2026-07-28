@@ -1,10 +1,11 @@
 <div class="team-roster">
 
-  <!-- Mobile -->
-  <h3 class="team-roster-title d-lg-none">
+  <h3 class="team-roster-title text-uppercase text-muted">
     Roster
   </h3>
 
+  <!-- Mobile roster is collapsed by default -->
+  <!-- This buttons toggles the collapse state of the roster on mobile -->
   <button
     class="mobile-player-selector btn btn-link d-lg-none"
     type="button"
@@ -27,11 +28,8 @@
 
   </button>
 
-  <!-- Desktop -->
-  <h3 class="team-roster-title d-none d-lg-block">
-    Roster
-  </h3>
 
+  <!-- Desktop roster is always expanded and not collapsible -->
   <div
     class="collapse d-lg-block"
     id="teamRosterCollapse">

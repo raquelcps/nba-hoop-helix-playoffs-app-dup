@@ -1,7 +1,28 @@
 <div class="category-card">
   <div class="category-card-header">
-    <h5><%= title %></h5>
-    <span class="team-total">Team: <%= team_total %></span>
+    <h5 class="category-card-title">
+      <%= title %>
+
+      <% if info.present? %>
+        <button
+          type="button"
+          class="category-card-info"
+          aria-label="More information about <%= title %>">
+
+          <i class="fa fa-info-circle"></i>
+
+        </button>
+
+        <div class="category-card-popover font-roboto">
+          <%= info %>
+        </div>
+      <% end %>
+
+    </h5>
+
+    <span class="team-total">
+      Team: <%= team_total %>
+    </span>
   </div>
 
   <table class="category-card-table">

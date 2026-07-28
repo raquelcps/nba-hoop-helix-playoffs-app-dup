@@ -5,6 +5,7 @@ function onResize() {
 document.addEventListener("turbolinks:load", () => {
   initializeCategoryCards();
   initializeResponsiveRoster();
+  initializeCategoryInfoPopovers();
 
   window.removeEventListener("resize", onResize);
   window.addEventListener("resize", onResize);
@@ -77,4 +78,59 @@ function initializeResponsiveRoster() {
   } else if (!mobile && !expanded) {
     collapse.show();
   }
+}
+
+function initializeCategoryInfoPopovers() {
+  const buttons = document.querySelectorAll(".category-card-info");
+
+  if (!buttons.length) return;
+
+
+  buttons.forEach((button) => {
+
+    if (button.dataset.initialized === "true") return;
+
+    button.dataset.initialized = "true";
+
+
+    const popover =
+      button.parentElement.querySelector(".category-card-popover");
+
+
+    if (!popover) return;
+
+
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      const isOpen =
+        popover.classList.contains("is-open");
+
+
+      document
+        .querySelectorAll(".category-card-popover.is-open")
+        .forEach((item) => {
+          item.classList.remove("is-open");
+        });
+
+
+      if (!isOpen) {
+        popover.classList.add("is-open");
+      }
+
+    });
+
+  });
+
+
+  document.addEventListener("click", () => {
+
+    document
+      .querySelectorAll(".category-card-popover.is-open")
+      .forEach((popover) => {
+        popover.classList.remove("is-open");
+      });
+
+  });
+
 }

@@ -74,9 +74,23 @@
 	<div class="row">
 
 		<div class="col-lg-9 order-2 order-lg-1">
+			<h3 class="category-grid-title text-uppercase">
+				Player Contributions
+			</h3>
 			<%
 			stat_categories = [
-				{ title: "Minutes",      stat: :min,     total: @team_totals["min"] },
+				{
+					title: "Minutes",
+					stat: :min,
+					total: @team_totals["min"],
+					info: <<~TEXT
+				Minutes contribution measures a player's share of team playing time.
+
+				Team minutes = games played × minutes per game × 5 players.
+
+				A player can contribute a maximum of 20% of a team's minutes.
+				TEXT
+				},
 				# { title: "Touches",      stat: :touches, total: @team_totals["touches"] }, #temporarily removed until we can get touches data for all players
 				{ title: "Points",       stat: :pts,     total: @team_totals["pts"] },
 				{ title: "FG Made",      stat: :fgm,     total: @team_totals["fgm"] },
@@ -104,10 +118,11 @@
 						title: category[:title],
 						stat: category[:stat],
 						team_total: category[:total],
+						info: category[:info],
 						players: @players %>
 				<% end %>
 			</div>
-			<!-- Repeat for rebounds, assists, etc. -->
+
 		</div>
 
 		<div class="col-lg-3 order-1 order-lg-2">
