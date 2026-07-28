@@ -1,4 +1,4 @@
-# Hoop Helix | [DEMO](https://onrender.com)
+# Hoop Helix | [DEMO](https://hoop-helix.onrender.com)
 
 Hoop Helix is a Ruby on Rails application for exploring basketball through interactive visualizations.
 
