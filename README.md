@@ -1,4 +1,6 @@
 # Hoop Helix | [DEMO](https://hoop-helix.onrender.com)
+- **[Project Board](https://github.com/users/raquelcps/projects/2)**
+
 
 Hoop Helix is a Ruby on Rails application for exploring basketball through interactive visualizations.
 
@@ -96,7 +98,7 @@ Current areas of exploration include:
 * WNBA support alongside NBA data
 * Comparable contribution metrics across both leagues
 
-As the project grows, I may use GitHub Projects to organize ideas, prioritize improvements, and track future development.
+As the project grows, I am using GitHub Projects to organize ideas, prioritize improvements, and track future development. Check out the [Project Board](https://github.com/users/raquelcps/projects/2).
 
 ## Technology
 
