@@ -3,11 +3,25 @@
 <!-- Main Content -->
 <section>
 
+	<%# This section sets up the stat information for the player show page. %>
+	<%
+		stat_info = {
+			min: <<~TEXT
+				Minutes contribution measures a player's share of team playing time.
+
+				Team minutes = game duration × 5 players.
+
+				A player can contribute a maximum of 20% of a team's available minutes.
+			TEXT
+		}
+	%>
+
 	<% @stats_to_show.each do |stat| %>
 
 		<%= render "player_stat_row",
 				title: stat.to_s.upcase,
 				stat: stat,
+				info: stat_info[stat],
 				player: @player,
 				team_totals: @team_totals,
 				contribution: @player_contributions[stat],

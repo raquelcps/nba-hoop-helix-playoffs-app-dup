@@ -3,6 +3,9 @@
   <div class="stat-header">
     <h5 class="stat-title mb-3">
       <%= title %>
+
+      <%= render "shared/stat_info", label: title, info: info %>
+
     </h5>
   </div>
 
@@ -13,7 +16,8 @@
       <%= render "player_contribution_bar",
           contribution: contribution,
           player_value: player[stat],
-          team_value: team_totals[stat]
+          team_value: team_totals[stat],
+          stat: stat
       %>
 
     </div>

@@ -3,25 +3,18 @@
     <h5 class="category-card-title">
       <%= title %>
 
-      <% if info.present? %>
-        <button
-          type="button"
-          class="category-card-info"
-          aria-label="More information about <%= title %>">
-
-          <i class="fa fa-info-circle"></i>
-
-        </button>
-
-        <div class="category-card-popover font-roboto">
-          <%= info %>
-        </div>
-      <% end %>
+      <%= render "shared/stat_info", label: title, info: info %>
 
     </h5>
 
+    <%# TODO: Move Minutes-specific team-total calculations into shared stat metadata. %>
+    <%
+      displayed_team_value =
+        stat == :min ? team_total * 5 : team_total
+    %>
+
     <span class="team-total">
-      Team: <%= team_total %>
+      Team:<%= format_stat_value(displayed_team_value, precision: 0) %>
     </span>
   </div>
 
@@ -52,11 +45,11 @@
           </td>
 
           <td class="player-value">
-            <%= format_contribution_percentage(value, precision: 0) %>
+            <%= format_stat_value(value, precision: 0) %>
           </td>
 
           <td class="player-percent">
-            <%= format_contribution_percentage(contribution) %>%
+            <%= format_stat_value(contribution) %>%
           </td>
         </tr>
 

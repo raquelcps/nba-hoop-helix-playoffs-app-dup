@@ -9,7 +9,7 @@
     <% if ranking[:above] %>
       <div class="rank-node neighbor">
         <span class="rank-num">#<%= ranking[:above][:rank] %></span>
-        <span class="rank-value"><%= format_contribution_percentage(ranking[:above][:value], precision: 0) %></span>
+        <span class="rank-value"><%= format_stat_value(ranking[:above][:value], precision: 0) %></span>
       </div>
     <% end %>
 
@@ -20,14 +20,14 @@
     <div class="rank-node active">
       <%# <div class="active-badge">You</div> %>
       <span class="rank-num">#<%= ranking[:rank] %></span>
-      <span class="rank-value"><%= format_contribution_percentage(ranking[:value], precision: 0) %></span>
+      <span class="rank-value"><%= format_stat_value(ranking[:value], precision: 0) %></span>
     </div>
 
     <!-- Next Rank Context -->
     <% if ranking[:below] %>
       <div class="rank-node neighbor">
         <span class="rank-num">#<%= ranking[:below][:rank] %></span>
-        <span class="rank-value"><%= format_contribution_percentage(ranking[:below][:value], precision: 0) %></span>
+        <span class="rank-value"><%= format_stat_value(ranking[:below][:value], precision: 0) %></span>
       </div>
     <% end %>
   </div>

@@ -1,0 +1,13 @@
+<% if info.present? %>
+  <button
+    type="button"
+    class="stat-info-button"
+    aria-label="More information about <%= label %>">
+
+    <i class="fa fa-info-circle"></i>
+  </button>
+
+  <div class="stat-info-popover font-roboto">
+    <%= info %>
+  </div>
+<% end %>

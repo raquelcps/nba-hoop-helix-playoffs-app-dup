@@ -15,7 +15,7 @@ module PlayersHelper
     ((player_stat.to_f / denominator) * 100)
   end
 
-  def format_contribution_percentage(value, precision: 1)
+  def format_stat_value(value, precision: 1)
     number_with_precision(value, precision: precision)
   end
 

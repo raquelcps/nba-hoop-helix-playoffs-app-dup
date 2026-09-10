@@ -32,13 +32,13 @@ class PlayersHelperTest < ActionView::TestCase
   end
 
   test "percentage formatting works correctly for whole numbers" do
-    result = format_contribution_percentage(20.0, precision: 0)
+    result = format_stat_value(20.0, precision: 0)
 
     assert_equal "20", result
   end
 
   test "percentage formatting works correctly for decimal numbers" do
-    result = format_contribution_percentage(20.5678, precision: 1)
+    result = format_stat_value(20.5678, precision: 1)
 
     assert_equal "20.6", result
   end

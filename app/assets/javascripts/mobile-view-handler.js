@@ -81,7 +81,7 @@ function initializeResponsiveRoster() {
 }
 
 function initializeCategoryInfoPopovers() {
-  const buttons = document.querySelectorAll(".category-card-info");
+  const buttons = document.querySelectorAll(".stat-info-button");
 
   if (!buttons.length) return;
 
@@ -94,7 +94,7 @@ function initializeCategoryInfoPopovers() {
 
 
     const popover =
-      button.parentElement.querySelector(".category-card-popover");
+      button.parentElement.querySelector(".stat-info-popover");
 
 
     if (!popover) return;
@@ -108,7 +108,7 @@ function initializeCategoryInfoPopovers() {
 
 
       document
-        .querySelectorAll(".category-card-popover.is-open")
+        .querySelectorAll(".stat-info-popover.is-open")
         .forEach((item) => {
           item.classList.remove("is-open");
         });
@@ -126,7 +126,7 @@ function initializeCategoryInfoPopovers() {
   document.addEventListener("click", () => {
 
     document
-      .querySelectorAll(".category-card-popover.is-open")
+      .querySelectorAll(".stat-info-popover.is-open")
       .forEach((popover) => {
         popover.classList.remove("is-open");
       });
